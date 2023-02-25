@@ -17,6 +17,9 @@ const postSchema = new Schema({
     },
     reactionsCount: {
         type: Number
+    },
+    dateCreated: {
+        type: Date
     }
 });
 

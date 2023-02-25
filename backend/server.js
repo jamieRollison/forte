@@ -1,6 +1,7 @@
 const express =  require('express');
 const cors = require('cors');
 const router = require('./routes/index.js');
+const { Auth } = require('./models')
 
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -19,11 +20,6 @@ async function start() {
   });
 
   app.use('/api', router);
-
-  app.get('/', async (req, res) => {
-    res.send('Hello Bob')
-  });
-
 }
 
 start();
