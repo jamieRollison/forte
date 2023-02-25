@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
 const { client_id, client_secret } = require('../spotify-credentials.js');
-import request from 'request';
+const request = require('request');
 
-export const router = express.Router();
+const router = express.Router();
 
 const generateToken = async () => {
   var authOptions = {
@@ -24,16 +24,15 @@ const generateToken = async () => {
 
 }
 
-const access_token = await generateToken();
-
+const access_token = generateToken().then((token) => token);
 
 // routes go here
 router.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-router.get('/search', (req, res) => {
-  const { q } = req.query;
+router.get('/search/:query', (req, res) => {
+  const { q } = req.params.query;
   const options = {
     url: `https://api.spotify.com/v1/search?q=${q}&type=track`,
     headers: {
@@ -47,4 +46,4 @@ router.get('/search', (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;
