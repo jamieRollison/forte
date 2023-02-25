@@ -1,5 +1,6 @@
 {
-  "name": "athenahacks",
+  "homepage": "https://forte.vercel.app",
+  "name": "forte",
   "private": true,
   "version": "0.0.0",
   "type": "module",
