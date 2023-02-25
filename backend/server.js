@@ -14,5 +14,4 @@ async function start() {
 
   app.use('/api', router);
 }
-
 start();
