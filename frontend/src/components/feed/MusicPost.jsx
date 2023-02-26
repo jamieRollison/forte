@@ -3,6 +3,8 @@ import Vinyl from "../../assets/vinyl.PNG"
 import { BsSpotify } from "react-icons/bs"
 import { getLikes } from "../../api/api"
 import { CommentSection } from "../../pages/CommentSection"
+import { BsChat } from "react-icons/bs"
+import { BsHeart } from "react-icons/bs"
 
 const MusicPost = ({
   spotifyCover,
@@ -13,17 +15,17 @@ const MusicPost = ({
   userDescription,
   picture,
   username,
+  url,
 }) => {
-  const [url, setUrl] = useState(spotifyCover)
   const [likes, setLikes] = useState([])
   const [likeCount, setLikeCount] = useState([])
   const postId = "63fb40a79c13727e0178c2a1"
 
   // Get likes in case we want usernames in the future
-  useEffect(() => {
-    getLikes(postId).then((likeIds) => setLikes(likeIds))
-    setLikeCount(likes.length)
-  }, [])
+  // useEffect(() => {
+  //   getLikes(postId).then((likeIds) => setLikes(likeIds))
+  //   setLikeCount(likes.length)
+  // }, [])
 
   return (
     <>
@@ -71,13 +73,16 @@ const MusicPost = ({
             <p className="text-gray-400">By {artist}</p>
           </div>
           <button
-            className="bg-green-600 hover:bg-green-800 rounded p-1 ml-10 text-white"
+            className="bg-green-600 hover:bg-green-800 rounded p-1 text-white"
             onClick={spotifyLink}
-          >
+          ><a href={url}>
             <div className="flex items-center mx-3 font-galos font-bold">
-              Play on
+              <p className="w-15">Play on</p>
+              
               <BsSpotify className="text-white text-xl ml-2" />
+              
             </div>
+            </a>
           </button>
         </div>
         <h1 className="text-gray-200 text-md self-left mx-12 mb-5 font-galos ">{userDescription}</h1>

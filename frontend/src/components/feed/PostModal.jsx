@@ -35,6 +35,7 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
     }
     await postPost(newPost)
     setModalVisible(false)
+    window.location.reload(false);
   }
 
   return (
