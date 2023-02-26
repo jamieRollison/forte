@@ -13,13 +13,13 @@ const Profile = () => {
     const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
     const [isCardModalVisible, setIsCardModalVisible] = useState(false);
 
-    useEffect(() => {
-            const getUserInfo = async () => {
-                const res = await getUser(userId)
-                setUser(res)
-            }
-            getUserInfo();
-      }, [setUser]);
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const res = await getUser(userId)
+      setUser(res)
+    }
+    getUserInfo()
+  }, [setUser])
 
     return (
         <>
