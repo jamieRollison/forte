@@ -55,4 +55,15 @@ export const getComment = async (commentId) => {
   const res = await api.get(requestString)
 
   return res.data
+  return res.data
+}
+
+export const updateUsername = async (id, username) => {
+  const requestString = `/users/${id}/${username}`
+  try {
+    await api.put(requestString)
+    return true
+  } catch (err) {
+    return false
+  }
 }

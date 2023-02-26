@@ -1,7 +1,7 @@
 import ReactModal from "react-modal"
 
 
-const PostModal = ({modalVisible, setModalVisible}) => {
+const AddFriendsModal = ({modalVisible, setModalVisible}) => {
     
     return (
       <ReactModal
@@ -29,4 +29,4 @@ const PostModal = ({modalVisible, setModalVisible}) => {
     )
   }
 
-export { PostModal }
+export { AddFriendsModal }

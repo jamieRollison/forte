@@ -82,3 +82,21 @@ router.get("/comments/comment/:commentId", async (req, res) => {
 })
 
 module.exports = router
+// Update user username
+router.put("/users/:id/:username", async (req, res) => {
+  const { id, username } = req.params
+
+  const doesUserExist = await User.exists({ username: username })
+
+  if (doesUserExist) {
+    res.status(404).send({})
+    return
+  }
+
+  const response = await User.findByIdAndUpdate(ObjectId(id), {
+    $set: { username: username },
+  })
+  res.status(200).send(response)
+})
+
+module.exports = router
