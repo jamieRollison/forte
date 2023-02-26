@@ -9,8 +9,8 @@ const postSchema = new Schema({
   description: {
     type: String,
   },
-  songId: {
-    type: String,
+  song: {
+    type: Schema.Types.ObjectId,
   },
   comments: {
     type: [Schema.Types.ObjectId],
@@ -24,7 +24,6 @@ const postSchema = new Schema({
 });
 
 const Post = mongoose.model("Post", postSchema, "Post");
-
 module.exports = {
   Post,
 };
