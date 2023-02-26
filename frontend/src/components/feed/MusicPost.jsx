@@ -70,7 +70,6 @@ const MusicPost = ({
             <h1 className="text-white text-2xl font-galos font-bold">{song}</h1>
             <p className="text-gray-400">By {artist}</p>
           </div>
-
           <button
             className="bg-green-600 hover:bg-green-800 rounded p-1  text-white"
             onClick={spotifyLink}
@@ -80,11 +79,8 @@ const MusicPost = ({
               <BsSpotify className="text-white text-xl ml-2" />
             </div>
           </button>
+          
         </div>
-        <div className="flex mx-12 my-2">
-          <p className="text-gray-200 font-galos text-md">{userDescription}</p>
-        </div>
-
         <CommentSection postId={postId} />
       </div>
     </>

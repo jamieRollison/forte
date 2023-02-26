@@ -34,13 +34,12 @@ const LoginButton = () => {
   }
 
   return (
-    <div style={{ paddingTop: "20%" }}>
+    <div className="pt-6">
       <button
-        style={{ padding: "10px 20px 10px 20px", borderRadius: "10px" }}
-        className="bg-white"
+        className="px-6 py-2 rounded-md font-galos border-2 text-white hover:bg-white hover:text-black border-white "
         onClick={onLogin}
       >
-        Log In
+        Get Started
       </button>
     </div>
   )

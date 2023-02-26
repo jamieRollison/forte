@@ -33,12 +33,12 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
           filterBy={() => true}
           isLoading={isLoading}
           labelKey="name"
+          size='lg'
           minLength={3}
           onSearch={handleSearch}
           options={options}
           placeholder="Search Spotify..."
-          size={"lg"}
-          className="px-2 w-60 h-8 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600"
+          className="px-2 h-8 rounded my-4 font-galos"
           renderMenuItemChildren={(option) => {
             return (
               <>

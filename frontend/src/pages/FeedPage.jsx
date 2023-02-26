@@ -43,6 +43,7 @@ const FeedPage = () => {
   setInterval(async () => {
     refreshAccessToken()
   }, 3600 * 1000)
+  
 
   return (
     <>
