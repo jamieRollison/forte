@@ -6,7 +6,7 @@ import { EditProfileModal } from '../components/profile/EditProfileModal';
 import { PostPreviewCard } from '../components/profile/PostPreviewCard';
 
 const Profile = () => {
-    const profiles = [1,2,3,4,5,45,45,45, 6, 7, 8]
+    const [posts, SetPosts] = useState(); 
     const location = useLocation();
     const { userId } = location.state;
     const [user, setUser] = useState({});
@@ -19,7 +19,11 @@ const Profile = () => {
       setUser(res)
     }
     getUserInfo()
-  }, [setUser])
+    const getUserPosts = async() => {
+      const res2 = await getUserPosts(userId)
+      setPosts(res2)
+    }
+  }, [setUser, setPosts])
 
     return (
         <>

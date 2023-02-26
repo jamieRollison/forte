@@ -134,5 +134,15 @@ try{ await Post.create(post).then(response =>
 catch {err => res.status(500).send(err)}
 })
 
+router.get("/posts/user/:userId", async (req, res) => {
+  const {userId} = req.params;
+  
+  
+try{ await Post.find({userId: userId}).then(response =>
+  res.status(200).send(response)) }
+catch {err => res.status(500).send(err)}
+})
+
+
 
 module.exports = router
