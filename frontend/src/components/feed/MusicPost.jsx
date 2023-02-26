@@ -28,10 +28,10 @@ return (
     backgroundSize: 'cover',
 
   }}>
-   <div className="mt-6 rounded-md max-w-md mx-10 z-1 sm:mx-auto height-wrap animate-spin-slow">
+   <div className="mt-6 rounded-md  mx-10 z-1 sm:mx-auto height-wrap">
       <div className="flex mx-10 flex-col justify-center items-center ">
-      <img className="absolute mx-auto top-28 z-2 width-wrap" src={spotifyCover}></img>
-      <img className="absolute mx-auto max-w-sm z-3 top-0"src={Vinyl}></img>
+      <img className="absolute z-2 w-24 [top:45%] [left:42%]" src={spotifyCover}></img>
+      <img className="absolute w-80 z-3 top-20 sm:left-0"src={Vinyl}></img>
       </div>
    </div>
   </div>

@@ -33,6 +33,7 @@ const FeedPage = () => {
     return (
         <>
             <NavBar userId={userId} showIcons={true}/>
+            
             <PostModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
             <div className="flex flex-col items-center">
             <div>
