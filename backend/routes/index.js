@@ -96,4 +96,23 @@ router.put("/users/:id/:username", async (req, res) => {
   res.status(200).send(response)
 })
 
+// Get user
+router.get("/posts/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  const userData = await User.findById(ObjectId(userId))
+  console.log(userData)
+  const friends = userData.friends;
+
+  var start = new Date();
+  start.setHours(0,0,0,0);
+
+  var end = new Date();
+  end.setHours(23,59,59,999);
+
+  const response = await Post.find({$and: [{ userId : { $in : friends } }, {dateCreated: {$gte: start, $lt: end}} ]});
+  res.status(200).send(response)
+
+})
+
 module.exports = router

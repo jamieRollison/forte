@@ -111,3 +111,15 @@ export const updateUsername = async (id, username) => {
     return false
   }
 }
+
+export const getPosts = async (userId) => {
+  if (userId) {
+    const requestString = `/posts/${userId}`
+    const res = await api.get(requestString)
+    console.log(res.data)
+    return res.data
+  } else {
+    return null
+  }
+    
+}
