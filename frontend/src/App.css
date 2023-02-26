@@ -22,3 +22,9 @@ body {
 .ReactModal__Overlay--before-close{
   opacity: 0;
 }
+
+.rbt-input-main  {
+  width: 25rem !important;
+  border-radius: 4px;
+  padding: 5px 5px 5px 10px;
+}
