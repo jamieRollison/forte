@@ -15,15 +15,15 @@ body {
   transition: opacity 300ms ease-in-out;
 }
 
-.ReactModal__Overlay--after-open{
+.ReactModal__Overlay--after-open {
   opacity: 1;
 }
 
-.ReactModal__Overlay--before-close{
+.ReactModal__Overlay--before-close {
   opacity: 0;
 }
 
-.rbt-input-main  {
+.rbt-input-main {
   width: 25rem !important;
   border-radius: 4px;
   padding: 5px 5px 5px 10px;

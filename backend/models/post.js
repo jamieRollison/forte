@@ -12,12 +12,8 @@ const postSchema = new Schema({
   song: {
     type: Schema.Types.ObjectId,
   },
-  comments: {
-    type: [Schema.Types.ObjectId],
-  },
-  reactions: {
-    type: [Schema.Types.ObjectId],
-  },
+  comments: [{ type : Schema.Types.ObjectId, ref: 'Comment' }],
+  reactions: [{ type : Schema.Types.ObjectId, ref: 'User' }],
   dateCreated: {
     type: Date,
   },

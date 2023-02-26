@@ -7,12 +7,20 @@ import { AddFriendsModal } from "./AddFriendsModal.jsx"
 import { useState } from "react"
 
 const NavBar = ({ userId, showIcons }) => {
-    const [modalFriendsVisible, setModalFriendsVisible] = useState(false)
+  const [modalFriendsVisible, setModalFriendsVisible] = useState(false)
   return (
     <nav className="bg-black text-white flex justify-center py-5">
       <div className="flex items-center justify-end gap-10">
-      <AddFriendsModal modalFriendsVisible={modalFriendsVisible} setModalFriendsVisible={setModalFriendsVisible}/>
-        {showIcons && <AiOutlineUsergroupAdd size={30} onClick={() => setModalFriendsVisible(true)} />}
+        <AddFriendsModal
+          modalFriendsVisible={modalFriendsVisible}
+          setModalFriendsVisible={setModalFriendsVisible}
+        />
+        {showIcons && (
+          <AiOutlineUsergroupAdd
+            size={30}
+            onClick={() => setModalFriendsVisible(true)}
+          />
+        )}
         <Link to="/feed">
           <img src={ForteLogo}></img>
         </Link>

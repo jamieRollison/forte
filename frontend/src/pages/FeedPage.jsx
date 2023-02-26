@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar.jsx"
 import MusicPost from "../components/feed/MusicPost.jsx"
 import { useEffect } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import { findOrCreateUser, getPosts } from "../api/api"
+import { findOrCreateUser, getFeedPosts } from "../api/api"
 import { PostModal } from "../components/feed/PostModal.jsx"
 import { useState } from "react"
 import Taylor from "../assets/midnights-sample.png"
@@ -39,22 +39,23 @@ const FeedPage = () => {
   }
 
   useEffect(() => {
-      const createPosts = async () => {
-        const posts = await getPosts(userId)
-        setPosts(posts)
-      }
-      createPosts()
+    const createPosts = async () => {
+      await getFeedPosts(userId).then((res) => setPosts(res))
     }
-  , [getPosts, setPosts, userId])
+    createPosts()
+  }, [getFeedPosts, setPosts, userId])
 
   useEffect(() => {
     refreshAccessToken()
   }, [])
 
+  useEffect(() => {
+    console.log(posts)
+  }, [posts])
+
   setInterval(async () => {
     refreshAccessToken()
   }, 3600 * 1000)
-  
 
   return (
     <>
@@ -83,6 +84,7 @@ const FeedPage = () => {
         song={"Midnight"}
         time={"13:48"}
       />
+      
     </>
   )
 }
