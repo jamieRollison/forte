@@ -6,9 +6,11 @@ const request = require("request");
 
 const router = express.Router()
 
-// routes go here
-router.get("/", (req, res) => {
-  res.send("Hello World!")
+router.post('/users', async (req, res) => {
+  const user = req.body;
+  const {username} = user;
+  const response = await User.findOneAndUpdate({username: username}, user, {upsert: true, new: true})
+  res.status(200).send(response);
 })
 
 // Get post likes

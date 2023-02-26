@@ -1,25 +1,36 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-  },
-  spotifyUsername: {
-    type: String,
-  },
-  posts: {
-    type: [Schema.Types.ObjectId],
-  },
-  friends: {
-    type: [Schema.Types.ObjectId],
-  },
-})
+const userSchema =  new Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    email: {
+        type: String
+    },
+    spotifyUsername: {
+        type: String
+    },
+    posts: {
+        type: [Schema.Types.ObjectId]
+    },
+    friends: {
+        type: [Schema.Types.ObjectId]
+    },
+    picture: {
+        type: String
+    }
+});
 
 const User = mongoose.model("User", userSchema, "User")
 

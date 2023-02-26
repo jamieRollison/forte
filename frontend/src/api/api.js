@@ -33,3 +33,9 @@ export const songSearch = async (query) => {
 
   return res.data;
 }
+
+export const findOrCreateUser = async (patientInfo) => {
+  const requestString = `/users`;
+  const res = await api.post(requestString, patientInfo);
+  return res.data;
+};
