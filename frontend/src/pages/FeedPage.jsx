@@ -1,11 +1,12 @@
 
 import NavBar from '../components/NavBar.jsx'
-import Post from '../components/Post.jsx'
+import MusicPost from '../components/feed/MusicPost.jsx'
 import { useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { findOrCreateUser } from '../api/api';
 import { PostModal } from '../components/feed/PostModal.jsx';
 import { useState } from "react";
+import Taylor from '../assets/midnights-sample.png';
 
 const FeedPage = () => {
     const [modalVisible, setModalVisible] = useState(false)
@@ -38,7 +39,12 @@ const FeedPage = () => {
                 Add Today's Song
                 </button>
             </div>
-            <Post />
+            <MusicPost
+             spotifyCover={Taylor}
+             userDescription={"Something about.. men. "}
+             artist={"Taylor Swift"}
+             song={"Midnight"}
+             time={"13:48"}/>
         </>
     )
 }
