@@ -45,21 +45,4 @@ router.delete("/likes/:postId/:userId", async (req, res) => {
   res.status(200).send("Removed like");
 });
 
-// search the spotify api
-router.get("/search", async (req, res) => {
-  const { q } = req.query;
-  console.log(q);
-  const options = {
-    url: `https://api.spotify.com/v1/search?q=${q}&type=track`,
-    headers: {
-      Authorization: `Bearer ${process.env.SPOTIFY_TOKEN}`,
-    },
-    json: true,
-  };
-  const search = await request.get('');
-  console.log(search.body);
-  res.status(200).send(search.body);
-});
-
-
 module.exports = router;

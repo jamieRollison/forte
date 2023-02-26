@@ -7,10 +7,19 @@ import { findOrCreateUser } from '../api/api';
 import { PostModal } from '../components/feed/PostModal.jsx';
 import { useState } from "react";
 import Taylor from '../assets/midnights-sample.png';
+import { getAccessToken } from '../api/api';
 
 const FeedPage = () => {
     const [modalVisible, setModalVisible] = useState(false)
     const { user, isLoading } = useAuth0();
+
+    const refreshAccessToken = async () => {
+        await getAccessToken().then((token) => {
+            localStorage.setItem("token", token);
+            console.log(localStorage.getItem("token"))
+        })
+    }
+
     useEffect(() => {
         if (!isLoading) {
             localStorage.setItem("user", JSON.stringify(user));
@@ -24,8 +33,13 @@ const FeedPage = () => {
                 })
             }
             makeUser();
+            refreshAccessToken();
         }
       }, [isLoading]);
+
+    setInterval(async () => {
+        refreshAccessToken();
+    }, 3600 * 1000);
 
     return (
         <>

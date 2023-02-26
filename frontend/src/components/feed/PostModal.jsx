@@ -2,7 +2,7 @@ import ReactModal from "react-modal"
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { useEffect, useState } from "react";
 import { songSearch } from "../../api/api.js";
-
+import { SearchResult } from "./SearchResult";
 
 const PostModal = ({modalVisible, setModalVisible}) => {
   const SEARCH_URI = 'https://api.github.com/search/users';
@@ -10,9 +10,9 @@ const PostModal = ({modalVisible, setModalVisible}) => {
     const [options, setOptions] = useState([]);
   
     const handleSearch = async (query) => {
+      setIsLoading(true);
   
-      // setOptions(await songSearch(query));
-      setOptions(['test', 'test2']);
+      setOptions(await songSearch(query));
       setIsLoading(false);
     };
 
@@ -38,17 +38,17 @@ const PostModal = ({modalVisible, setModalVisible}) => {
           id="async-example"
         filterBy={filterBy}
         isLoading={isLoading}
-        labelKey="login"
+        labelKey="name"
         minLength={3}
         onSearch={handleSearch}
         options={options}
         placeholder="Search Spotify..."
-        className="px-2 w-60 h-8 rounded my-4 mx-10"
-        renderMenuItemChildren={(option) => (
+        className="px-2 h-8 rounded my-4 mx-10 last:border-y-white last:border-y-2"
+        renderMenuItemChildren={(option) => {console.log(option); return (
           <>
-            <div className="bg-white">test</div>
+            <SearchResult {...option}/>
           </>
-        )}
+        )}}
       />
           <button
             className="bg-blue-200 p-2 rounded-md w-1/2"

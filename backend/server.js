@@ -16,8 +16,6 @@ const start = async () => {
     useUnifiedTopology: true,
   })
 
-  await getAccessToken();
-
   app.listen(3000, () => {
     console.log("Server started on port 3000")
   })
