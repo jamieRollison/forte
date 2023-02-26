@@ -26,6 +26,7 @@ const FeedPage = () => {
           email: `${user.nickname}@gmail.com`,
         })
         setUserId(res._id)
+        localStorage.setItem("userId", res._id)
       }
       makeUser()
     }
@@ -53,6 +54,7 @@ const FeedPage = () => {
   setInterval(async () => {
     refreshAccessToken()
   }, 3600 * 1000)
+  
 
   return (
     <>

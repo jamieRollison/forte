@@ -123,3 +123,22 @@ export const getPosts = async (userId) => {
   }
     
 }
+export const postPost = async (post) => {
+  console.log('post', post)
+  const requestString = `/posts`
+  const songId = await postSong(post.song).then((res) => {
+    return res._id
+  })
+  const postData = {...post, song: songId}
+  const res = await api.post(requestString, postData)
+
+  return res.data
+}
+
+export const postSong = async (song) => {
+  console.log('song', song)
+  const requestString = `/songs`
+  const res = await api.post(requestString, song)
+
+  return res.data
+}
