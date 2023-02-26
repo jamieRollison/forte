@@ -39,22 +39,23 @@ const FeedPage = () => {
   }
 
   useEffect(() => {
-      const createPosts = async () => {
-        const posts = await getPosts(userId)
-        setPosts(posts)
-      }
-      createPosts()
+    const createPosts = async () => {
+      await getPosts(userId).then((res) => setPosts(res))
     }
-  , [getPosts, setPosts, userId])
+    createPosts()
+  }, [getPosts, setPosts, userId])
 
   useEffect(() => {
     refreshAccessToken()
   }, [])
 
+  useEffect(() => {
+    console.log(posts)
+  }, [posts])
+
   setInterval(async () => {
     refreshAccessToken()
   }, 3600 * 1000)
-  
 
   return (
     <>
@@ -83,6 +84,7 @@ const FeedPage = () => {
         song={"Midnight"}
         time={"13:48"}
       />
+      
     </>
   )
 }

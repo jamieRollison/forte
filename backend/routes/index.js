@@ -7,14 +7,18 @@ const router = express.Router()
 // Add user to database if they do not already have an account
 router.post("/users", async (req, res) => {
   const user = req.body
-  const { username } = user
-
-  const response = await User.findOneAndUpdate({ username: username }, user, {
-    upsert: true,
-    new: true,
-  })
-
-  res.status(200).send(response)
+  const { email } = user
+  try {
+    await User.findOneAndUpdate({ email: email }, user, {
+      upsert: true,
+      new: true,
+    }).then((response) => {
+      res.status(200).send(response)
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
 })
 
 // Get post likes
@@ -140,19 +144,21 @@ router.get("/posts/:userId", async (req, res) => {
   const { userId } = req.params
 
   const userData = await User.findById(ObjectId(userId))
-  console.log(userData)
-  const friends = userData.friends
+  const friends = userData.friends.concat(userId).map((id) => ObjectId(id))
+
+  console.log("friends", friends)
 
   var start = new Date()
   start.setHours(0, 0, 0, 0)
 
   var end = new Date()
   end.setHours(23, 59, 59, 999)
-
-  const response = await Post.find({
-    $and: [{ userId: { $in: friends } }, { dateCreated: { $gte: start, $lt: end } }],
+  // {dateCreated: {$gte: start, $lt: end}}
+  // {$and: [
+  await Post.find({ userId: { $in: friends } }).then((response) => {
+    console.log("posts:", response)
+    res.status(200).send(response)
   })
-  res.status(200).send(response)
 })
 
 // Post a song to the database
@@ -172,11 +178,22 @@ router.post("/songs", async (req, res) => {
   }
 })
 
+// post a post to the database
 router.post("/posts", async (req, res) => {
   const post = req.body
   console.log("post in router", post)
   try {
     await Post.create(post).then((response) => res.status(200).send(response))
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
+})
+
+// get a song from the database
+router.get("/songs/:songId", async (req, res) => {
+  const { songId } = req.params
+  try {
+    await Song.findById(songId).then((response) => res.status(200).send(response))
   } catch {
     ;(err) => res.status(500).send(err)
   }
