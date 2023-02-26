@@ -45,4 +45,28 @@ router.delete("/likes/:postId/:userId", async (req, res) => {
   res.status(200).send("Removed like");
 });
 
+// Get user
+router.get("/users/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  const userData = await User.findById(ObjectId(userId))
+
+  res.status(200).send(userData)
+})
+
+// Update user username
+router.put("/users/:id/:username", async (req, res) => {
+  const { id, username } = req.params
+
+  const doesUserExist = await User.exists({ username: username });
+
+  if (doesUserExist) {
+    res.status(404).send({})
+    return;
+  } 
+
+  const response = await User.findByIdAndUpdate(ObjectId(id), {$set: {username: username}})
+  res.status(200).send(response);
+})
+
 module.exports = router;
