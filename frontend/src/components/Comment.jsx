@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { getUser, getComment } from "../api/api"
 
 const Comment = ({ commentId }) => {
-  const [username, setUsername] = useState()
   const [picture, setPicture] = useState()
   const [commentContent, setCommentContent] = useState()
 
@@ -11,7 +10,6 @@ const Comment = ({ commentId }) => {
       setCommentContent(comment.content)
 
       getUser(comment.commenterId.toString()).then((userData) => {
-        setUsername(userData.username)
         setPicture(userData.picture)
       })
     })

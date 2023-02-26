@@ -96,13 +96,43 @@ router.put("/users/:id/:username", async (req, res) => {
 })
 
 // Finds all usernames starting with the input
-router.get("/users?search=input", async (req, res) => {
-  const { input } = req.params
-  const formattedSearch = `/^${input}/`
+router.get("/users?user=query", async (req, res) => {
+  const { query } = req.params
+  const formattedSearch = `/^${query}/`
 
   const response = await User.find({ username: formattedSearch })
 
   res.status(200).send(response)
+})
+
+// Find user with the username
+router.get("/users?username=query", async (req, res) => {
+  const { query } = req.params
+  const formattedSearch = `/${query}/`
+
+  const response = await User.findOne({ username: formattedSearch })
+
+  res.status(200).send(response)
+})
+
+// Get friends
+router.get("/users/friends/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  const friendData = await User.findById(ObjectId(userId)).friends
+
+  res.status(200).send(friendData)
+})
+
+// Add friends
+router.post("/friends", async (req, res) => {
+  const { userId, friendId } = req.params
+
+  const response = await User.findByIdAndUpdate(userId, {
+    $push: { friends: ObjectId(friendId) },
+  })
+
+  res.status(200).send("Added like")
 })
 
 module.exports = router

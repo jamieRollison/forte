@@ -112,10 +112,34 @@ export const updateUsername = async (id, username) => {
   }
 }
 
-export const findUserLike = async (input) => {
-  const requestString = `/users?search=${input}`
+export const findUserLike = async (query) => {
+  const requestString = `/users?query=${query}`
 
   const res = await api.get(requestString)
+
+  return res.data
+}
+
+export const getUserByUsername = async (username) => {
+  const requestString = `/users?username=${username}`
+
+  const res = await api.get(requestString)
+
+  return res.data
+}
+
+export const getFriends = async (userId) => {
+  const requestString = `/friends/${userId}`
+
+  const res = await api.get(requestString)
+
+  return res.data
+}
+
+export const addFriend = async (userId, friendId) => {
+  const requestString = "/friends"
+
+  const res = await api.post(requestString, { userId, friendId })
 
   return res.data
 }
