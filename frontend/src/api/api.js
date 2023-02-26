@@ -1,15 +1,48 @@
 import api from "../axios";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 
 export const getAccessToken = async () => {
-  const requestString = 'https://accounts.spotify.com/api/token';
-  const options = {headers: {'Content-Type':'application/x-www-form-urlencoded', 'Authorization': 'Basic ' + (Buffer.from(import.meta.env.VITE_SPOTIFY_CLIENT_ID + ':' + import.meta.env.VITE_SPOTIFY_CLIENT_SECRET).toString('base64'))}, params: {
-    grant_type: 'client_credentials', json: true
-  }}
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    headers: {
+      Authorization:
+        "Basic " +
+        Buffer.from(
+          import.meta.env.VITE_SPOTIFY_CLIENT_ID +
+            ":" +
+            import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
+        ).toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: {
+      form: {
+        grant_type: "client_credentials",
+      },
+      json: true,
+    },
+  }
 
-  return await api.post(requestString, {}, options).then((res) => {
-    return res.data.access_token;
-  });
+  return await api
+    .post(
+      authOptions.url,
+      {},
+      {
+        params: { grant_type: "client_credentials", json: true },
+        headers: authOptions.headers,
+      }
+    )
+    .then((res) => {
+      return res.data.access_token
+    })
+}
+
+export const songSearch = async (query) => {
+  const requestString = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`
+  const res = await api.get(requestString, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  })
+
+  return res.data.tracks.items
 }
 
 export const getLikes = async (postId) => {
