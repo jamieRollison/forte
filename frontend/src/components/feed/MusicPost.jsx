@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Vinyl from "../../assets/vinyl.PNG"
 import { BsSpotify } from "react-icons/bs"
-import MyPFP from "../../assets/ellie.JPG"
 import { getLikes } from "../../api/api"
 import { CommentSection } from "../../pages/CommentSection"
 import { BsChat } from "react-icons/bs"
@@ -98,6 +97,9 @@ const MusicPost = ({
             <BsChat className="text-white w-8 h-8 self-right mr-14" />
           </div>
         </div>
+        <h1 className="text-gray-200 text-md self-left mx-12 mb-5 font-galos ">
+          {userDescription}
+        </h1>
         <CommentSection postId={postId} />
       </div>
     </>

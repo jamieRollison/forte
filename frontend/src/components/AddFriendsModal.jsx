@@ -1,12 +1,49 @@
 import ReactModal from "react-modal"
 import { BsPeopleFill } from "react-icons/bs"
+import { useState } from "react"
+import { getUserByUsername, getFriends, addFriend } from "../api/api"
 
 const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
+  const [input, setInput] = useState()
+  const [isFinished, setIsFinished] = useState()
+  const [friendedState, setFriendedState] = useState()
+
   const bg = {
     overlay: {
       background: "rgba(0, 0, 0, 0.40)",
     },
   }
+  const userId = "63fb7bb826a60860353ab47a"
+
+  const handleClick = async () => {
+    // This user is the friend
+    getUserByUsername(input).then((friend) => {
+      if (friend) {
+        getFriends(userId).then((friendIds) => {
+          if (friendIds.find((friendId) => friendId === friend._id)) {
+            setFriendedState(`Already friended ${input}!`)
+          } else {
+            addFriend(userId, friend._id).then(() => {
+              setFriendedState(`Friended ${input}!`)
+            })
+          }
+        })
+      } else {
+        setFriendedState(
+          `Try again with another username. User ${input} does not exist!`
+        )
+      }
+
+      setIsFinished(true)
+    })
+  }
+
+  const handleEditing = async (event) => {
+    setInput(event.target.value)
+    setIsFinished(false)
+    setFriendedState("")
+  }
+
   return (
     <ReactModal
       isOpen={modalFriendsVisible}
@@ -29,14 +66,16 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
           type="text"
           placeholder="Lookup username"
           className="pl-2 w-60 h-8 text-sm rounded my-4 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600"
+          onChange={(e) => handleEditing(e)}
         />
         <button
           className="bg-amber-400 rounded-md w-8 h-8 font-galos text-white"
-          onClick={() => setModalFriendsVisible(false)}
+          onClick={handleClick}
         >
           +
         </button>
       </div>
+      {isFinished ? <p className="text-white mt-2 mx-12">{friendedState}</p> : <></>}
     </ReactModal>
   )
 }
