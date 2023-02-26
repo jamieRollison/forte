@@ -14,7 +14,7 @@ const CommentSection = ({ postId }) => {
   }, [])
 
   return (
-    <div className="flex flex-col gap-10 mx-10">
+    <div className="flex flex-col mx-10">
       {comments.length !== 0 &&
         comments.map((commentId) => {
           return <Comment key={commentId} commentId={commentId} />

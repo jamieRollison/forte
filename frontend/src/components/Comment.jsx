@@ -18,17 +18,16 @@ const Comment = ({ commentId }) => {
   }, [])
 
   return (
-    <div className="h-1/6 w-full">
-      <div className="w-10 h-10 relative overflow-hidden border-sm">
+    <div className="h-1/6 w-full flex border-t-2 border-gray-800 p-2">
+      <div className="w-6 h-6 relative overflow-hidden border-sm">
         <img
           className="inline mx-0 my-auto h-full w-auto rounded-full"
           src={picture}
-        ></img>
+        />
       </div>
-      <p className="text-white">
-        <b>{username}</b>
-        {commentContent}
-      </p>
+      <div className="ml-3 flex text-sm">
+        <p className="text-white "> {commentContent} </p>
+      </div>
     </div>
   )
 }
