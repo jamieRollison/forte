@@ -4,11 +4,12 @@ import Post from '../components/Post.jsx'
 import { useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { findOrCreateUser } from '../../api/api.js';
-
+import { PostModal } from '../components/feed/PostModal.jsx';
+import { useState } from "react";
 
 const FeedPage = () => {
+    const [modalVisible, setModalVisible] = useState(false)
     const { user, isLoading } = useAuth0();
-    console.log(user)
     useEffect(() => {
         if (!isLoading) {
             localStorage.setItem("user", JSON.stringify(user));
@@ -28,8 +29,12 @@ const FeedPage = () => {
     return (
         <>
             <NavBar />
-            <div className='flex justify-center'>
-                <button className='mx-10 bg-blue-200 p-2 flex-1 md:w-10 rounded-md'>
+            <PostModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <div className="flex justify-center">
+                <button
+                className="mx-10 bg-blue-200 p-2 flex-1 md:w-10 rounded-md"
+                onClick={() => setModalVisible(true)}
+                >
                 Add Today's Song
                 </button>
             </div>

@@ -14,7 +14,9 @@ const Home = () => {
           <img src={ForteLogo}></img>
         </div>
       </nav>
-      <LoginButton/>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <LoginButton/>
+      </div>
       </div>
     );
 }

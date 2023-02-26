@@ -35,7 +35,6 @@ const LoginButton = () => {
         loginWithRedirect();
     }
 
-  return <button className="bg-white" onClick={onLogin}>Log In</button>;
+  return <div style={{paddingTop:"20%"}}><button style={{padding: "10px 20px 10px 20px", borderRadius: "10px"}} className="bg-white" onClick={onLogin}>Log In</button></div>;
 };
-
 export {LoginButton};
