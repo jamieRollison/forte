@@ -28,6 +28,6 @@ export const addLike = async (postId, userId) => {
 
 export const findOrCreateUser = async (patientInfo) => {
   const requestString = `/users`;
-  const res = await instance.post(requestString, patientInfo);
+  const res = await api.post(requestString, patientInfo);
   return res.data;
 };

@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Ringift";
-  src: local("Ringift"), url("./assets/ringift.ttf");
+    font-family: "Ringift";
+    src: local("Ringift"), url("./assets/ringift.ttf");
 }
 
 @font-face {
-  font-family: "Neogram";
-  src: local("Neogram") url("./assets/NeoGramTrial-Medium-BF63eaf5cdc966a.otf");
+    font-family: "Neogram";
+    src: local("Neogram")url("./assets/NeoGramTrial-Medium-BF63eaf5cdc966a.otf");
 }
+

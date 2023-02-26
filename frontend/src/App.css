@@ -4,3 +4,11 @@ body {
 h1 {
   font-family: "Ringift";
 }
+
+.height-wrap {
+  height: 400px;
+}
+
+.width-wrap {
+  width: 135px;
+}
