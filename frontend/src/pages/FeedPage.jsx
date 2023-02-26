@@ -48,6 +48,7 @@ const FeedPage = () => {
                 
             </div>
             <MusicPost
+            username={"exrlla"}
              spotifyCover={Taylor}
              userDescription={"Something about.. men. "}
              artist={"Taylor Swift"}
