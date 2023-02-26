@@ -9,7 +9,7 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [options, setOptions] = useState([])
   const [selected, setSelected] = useState({})
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("")
 
   const handleSearch = async (query) => {
     setIsLoading(true)
@@ -55,37 +55,36 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
           filterBy={() => true}
           isLoading={isLoading}
           labelKey="name"
-          size='lg'
+          size="lg"
           minLength={3}
           onSearch={handleSearch}
-          onChange={(selected) => setSelected({...selected[0]})}
+          onChange={(selected) => setSelected({ ...selected[0] })}
           options={options}
           placeholder="Search Spotify..."
           className="px-2 h-8 rounded my-4 font-galos"
           renderMenuItemChildren={(option) => {
             return (
               <>
-                <SearchResult {...option}/>
+                <SearchResult {...option} />
               </>
             )
           }}
         />
         {Object.keys(selected).length !== 0 && (
           <>
-          <div className="flex flex-col items-center">
-            <p className="text-white">Add a description to your post</p>
-            <textarea
-              className="w-60 h-20 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600 resize-none"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            
+            <div className="flex flex-col items-center">
+              <p className="text-white">Add a description to your post</p>
+              <textarea
+                className="w-60 h-20 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600 resize-none"
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
             <button
-            className="bg-amber-400 p-2 mb-5 rounded-md w-1/2 font-galos text-white"
-            onClick={postSong}
-          >
-            Add Song
-          </button>
+              className="bg-amber-400 p-2 mb-5 rounded-md w-1/2 font-galos text-white"
+              onClick={postSong}
+            >
+              Add Song
+            </button>
           </>
         )}
       </div>
