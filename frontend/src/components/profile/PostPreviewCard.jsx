@@ -11,7 +11,7 @@ const PostPreviewCard = ({
 }) => (
   <>
     <Card
-      style={{ width: "75px", marginRight: "2.5px", marginLeft: "2.5px" }}
+      style={{ width: "150px", marginRight: "5px", marginLeft: "5px" }}
       onClick={() => setIsCardModalVisible(true)}
     >
       <Image src={img} wrapped ui={false} />
