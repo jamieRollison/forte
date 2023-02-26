@@ -1,14 +1,13 @@
 
 import './App.css'
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home"
 import './App.css'
 import './assets/ringift.ttf'
 import { FeedPage } from './pages/FeedPage';
-// import reactLogo from './assets/react.svg'
 
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -22,5 +21,4 @@ export default function App() {
 
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default App;
