@@ -16,7 +16,8 @@ const FeedPage = () => {
 
   useEffect(() => {
     const createPosts = async () => {
-    await Promise.all(postData.map(async (post, key) => {
+      if(postData) {
+    await Promise.all(postData.map(async (post) => {
       const d = new Date(post.dateCreated)
       const {artist, imgUrl, songName} = await getSong(post.song).then((res) => res)
       const { username, picture } = await getUser(post.userId).then((res) => res)
@@ -30,9 +31,10 @@ const FeedPage = () => {
         picture: picture
       }
     })).then((res) => {setPosts(res)})}
+  }
     createPosts()
   }
-  , [postData])
+  , [postData, setPosts])
 
   useEffect(() => {
     if (!isLoading) {
@@ -50,7 +52,7 @@ const FeedPage = () => {
       }
       makeUser()
     }
-  }, [isLoading, setUserId])
+  }, [isLoading, setUserId, user])
 
   const refreshAccessToken = async () => {
     await getAccessToken().then((token) => {
@@ -95,6 +97,7 @@ const FeedPage = () => {
       {posts.map((post, key) => {
         return (
           <MusicPost
+            key={key}
             username={post.username}
             spotifyCover={post.imgUrl}
             userDescription={post.userDescription}
