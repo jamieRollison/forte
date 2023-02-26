@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Vinyl from "../../assets/vinyl.PNG"
 import { BsSpotify } from "react-icons/bs"
-import MyPFP from "../../assets/ellie.JPG"
 import { getLikes } from "../../api/api"
 import { CommentSection } from "../../pages/CommentSection"
 
@@ -72,7 +71,7 @@ const MusicPost = ({
             <p className="text-gray-400">By {artist}</p>
           </div>
           <button
-            className="bg-green-600 hover:bg-green-800 rounded p-1  text-white"
+            className="bg-green-600 hover:bg-green-800 rounded p-1 ml-10 text-white"
             onClick={spotifyLink}
           >
             <div className="flex items-center mx-3 font-galos font-bold">
@@ -81,7 +80,7 @@ const MusicPost = ({
             </div>
           </button>
         </div>
-        <h1 className="text-white text-lg self-center mb-5 font-galos font-bold">{userDescription}</h1>
+        <h1 className="text-gray-200 text-md self-left mx-12 mb-5 font-galos ">{userDescription}</h1>
         <CommentSection postId={postId} />
       </div>
     </>
