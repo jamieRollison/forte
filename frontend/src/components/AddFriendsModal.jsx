@@ -13,7 +13,7 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
       background: "rgba(0, 0, 0, 0.40)",
     },
   }
-  const userId = "63fb7bb826a60860353ab47a"
+  const userId = localStorage.getItem("userId")
 
   const handleClick = async () => {
     // This user is the friend
