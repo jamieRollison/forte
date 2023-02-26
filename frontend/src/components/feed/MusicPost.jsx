@@ -13,6 +13,7 @@ const MusicPost = ({
   time,
   userDescription,
   username,
+  picture
 }) => {
   const [url, setUrl] = useState(spotifyCover)
   const [likes, setLikes] = useState([])
@@ -34,7 +35,7 @@ const MusicPost = ({
               <div className="w-10 h-10 relative overflow-hidden border-sm">
                 <img
                   className="inline my-auto h-full w-auto rounded-full"
-                  src={MyPFP}
+                  src={picture}
                 ></img>
               </div>
             </div>
@@ -80,6 +81,7 @@ const MusicPost = ({
             </div>
           </button>
         </div>
+          <p className="text-white self-left mb-8 mx-12">{userDescription}</p>
         <CommentSection postId={postId} />
       </div>
     </>

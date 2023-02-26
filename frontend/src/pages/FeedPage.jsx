@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar.jsx"
 import MusicPost from "../components/feed/MusicPost.jsx"
 import { useEffect } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import { findOrCreateUser, getPosts } from "../api/api"
+import { findOrCreateUser, getFeedPosts, getSong, getUser } from "../api/api"
 import { PostModal } from "../components/feed/PostModal.jsx"
 import { useState } from "react"
 import Taylor from "../assets/midnights-sample.png"
@@ -13,7 +13,9 @@ const FeedPage = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [userId, setUserId] = useState("")
   const { user, isLoading } = useAuth0()
+  const [postData, setPostData] = useState([])
   const [posts, setPosts] = useState([])
+
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem("user", JSON.stringify(user))
@@ -32,6 +34,26 @@ const FeedPage = () => {
     }
   }, [isLoading, setUserId])
 
+  useEffect(() => {
+    const createPosts = async () => {
+    await Promise.all(postData.map(async (post, key) => {
+      const d = new Date(post.dateCreated)
+      const {artist, imgUrl, songName} = await getSong(post.song).then((res) => res)
+      const { username, picture } = await getUser(post.userId).then((res) => res)
+      return {
+        userDescription: post.description,
+        time: d.toLocaleTimeString(),
+        artist: artist,
+        imgUrl: imgUrl,
+        songName: songName,
+        username: username,
+        picture: picture
+      }
+    })).then((res) => {setPosts(res)})}
+    createPosts()
+  }
+  , [postData])
+
   const refreshAccessToken = async () => {
     await getAccessToken().then((token) => {
       localStorage.setItem("token", token)
@@ -39,19 +61,19 @@ const FeedPage = () => {
   }
 
   useEffect(() => {
-    const createPosts = async () => {
-      await getPosts(localStorage.getItem('userId')).then((res) => setPosts(res))
+    const generateFeed = async () => {
+      await getFeedPosts(localStorage.getItem('userId')).then((res) => setPostData(res))
     }
-    createPosts()
-  }, [getPosts, setPosts, userId])
+    generateFeed()
+  }, [getFeedPosts, setPostData, userId])
 
   useEffect(() => {
     refreshAccessToken()
   }, [])
 
   useEffect(() => {
-    console.log(posts)
-  }, [posts])
+    console.log(postData)
+  }, [postData])
 
   setInterval(async () => {
     refreshAccessToken()
@@ -76,14 +98,18 @@ const FeedPage = () => {
           <span>Add Today's Song</span>
         </button>
       </div>
-      <MusicPost
-        username={"exrlla"}
-        spotifyCover={Taylor}
-        userDescription={"Something about.. men. "}
-        artist={"Taylor Swift"}
-        song={"Midnight"}
-        time={"13:48"}
-      />
+      {posts.map( (post, key) => {
+        return(<MusicPost
+          username={post.username}
+          spotifyCover={post.imgUrl}
+          userDescription={post.userDescription}
+          artist={post.artist}
+          song={post.songName}
+          time={''}
+          picture={post.picture}
+        />)
+      })}
+      
       
     </>
   )

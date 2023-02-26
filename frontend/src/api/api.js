@@ -112,7 +112,7 @@ export const updateUsername = async (id, username) => {
   }
 }
 
-export const getPosts = async (userId) => {
+export const getFeedPosts = async (userId) => {
   if (userId) {
     const requestString = `/posts/${userId}`
     const res = await api.get(requestString)
@@ -141,6 +141,7 @@ export const postSong = async (song) => {
 }
 
 export const getSong = async (songId) => {
+  console.log(songId)
   const requestString = `/songs/${songId}`
   const res = await api.get(requestString)
 
