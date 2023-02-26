@@ -1,4 +1,4 @@
-const { User, Post, Comment } = require("../models")
+const { User, Post, Comment, Song } = require("../models")
 const express = require("express")
 const ObjectId = require("mongodb").ObjectId
 
@@ -133,6 +133,53 @@ router.post("/friends", async (req, res) => {
   })
 
   res.status(200).send("Added like")
+})
+
+// Get user
+router.get("/posts/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  const userData = await User.findById(ObjectId(userId))
+  console.log(userData)
+  const friends = userData.friends
+
+  var start = new Date()
+  start.setHours(0, 0, 0, 0)
+
+  var end = new Date()
+  end.setHours(23, 59, 59, 999)
+
+  const response = await Post.find({
+    $and: [{ userId: { $in: friends } }, { dateCreated: { $gte: start, $lt: end } }],
+  })
+  res.status(200).send(response)
+})
+
+// Post a song to the database
+router.post("/songs", async (req, res) => {
+  const song = req.body
+  console.log("song in router", song)
+  try {
+    await Song.findOneAndUpdate(
+      song,
+      { $setOnInsert: { song } },
+      { new: true, upsert: true }
+    ).then((response) => {
+      res.status(200).send(response)
+    })
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.post("/posts", async (req, res) => {
+  const post = req.body
+  console.log("post in router", post)
+  try {
+    await Post.create(post).then((response) => res.status(200).send(response))
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
 })
 
 module.exports = router

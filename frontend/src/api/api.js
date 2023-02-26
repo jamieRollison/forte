@@ -116,6 +116,27 @@ export const findUserLike = async (query) => {
   const requestString = `/users?query=${query}`
 
   const res = await api.get(requestString)
+}
+
+export const getPosts = async (userId) => {
+  if (userId) {
+    const requestString = `/posts/${userId}`
+    const res = await api.get(requestString)
+    console.log(res.data)
+    return res.data
+  } else {
+    return null
+  }
+    
+}
+export const postPost = async (post) => {
+  console.log('post', post)
+  const requestString = `/posts`
+  const songId = await postSong(post.song).then((res) => {
+    return res._id
+  })
+  const postData = {...post, song: songId}
+  const res = await api.post(requestString, postData)
 
   return res.data
 }
@@ -140,6 +161,10 @@ export const addFriend = async (userId, friendId) => {
   const requestString = "/friends"
 
   const res = await api.post(requestString, { userId, friendId })
+export const postSong = async (song) => {
+  console.log('song', song)
+  const requestString = `/songs`
+  const res = await api.post(requestString, song)
 
   return res.data
 }
