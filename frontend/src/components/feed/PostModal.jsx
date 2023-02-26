@@ -20,7 +20,7 @@ const PostModal = ({modalVisible, setModalVisible}) => {
         isOpen={modalVisible}
         appElement={document.getElementById('root')}
         onRequestClose={() => setModalVisible(false)}
-        className="w-80 h-1/5 mt-40 bg-black mx-auto rounded-xl"
+        className="w-80 h-auto mt-40 bg-black mx-auto rounded-xl"
       >
         <div className="flex flex-col justify-between items-center">
           <p className="text-white text-xl text-center pt-3 font-galos px-10">
@@ -45,7 +45,7 @@ const PostModal = ({modalVisible, setModalVisible}) => {
           }}
         />
           <button
-            className="bg-amber-400 p-2 rounded-md w-1/2 font-galos text-white"
+            className="bg-amber-400 p-2 mb-5 rounded-md w-1/2 font-galos text-white"
             onClick={() => setModalVisible(false)}
           >
             Add Song
