@@ -1,6 +1,7 @@
 const express = require('express');
-const { client_id, client_secret } = require('../spotify-credentials.js');
+const { client_id, client_secret } = require('./spotify-credentials.js');
 const request = require('request');
+require('dotenv').config();
 
 const router = express.Router();
 
