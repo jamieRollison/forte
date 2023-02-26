@@ -1,9 +1,15 @@
 const Home = () => {
-
     return (
-    <>
-    <h1>Hi</h1>
-    </>
+    <div>
+      <h1>Login</h1>
+      <div>
+        <input type="text" placeholder='Username' onChange={() => {}} required/>
+        <br/><br/>
+        <input type="password" placeholder='Password' onChange={() => {}} required/>
+      </div>
+      <br></br>
+      <button onClick = {() => {}}>Login</button>
+    </div>
     );
 
 
