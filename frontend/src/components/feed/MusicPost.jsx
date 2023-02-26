@@ -1,11 +1,13 @@
 import React from "react";
-import Vinyl from '../assets/vinyl.PNG'
+import Vinyl from '../../assets/vinyl.PNG'
 import { BsSpotify } from "react-icons/bs";
-import MyPFP from '../assets/ellie.JPG'
+import MyPFP from '../../assets/ellie.JPG'
 function MusicPost({spotifyCover, spotifyLink, artist, song, time, userDescription}) {
   const [url, setUrl] = React.useState(spotifyCover)
 return (
   <>
+  <div className="mb-10">
+
   <div className="flex justify-between mx-10">
     <div className="mt-10 flex items-center">
       <div className="w-30 h-30 overflow-hidden object-cover">
@@ -25,7 +27,12 @@ return (
     </p>
   </div>
 
-  <div className="relative">
+  <div className="relative mx-10 rounded-lg" style={{
+    backgroundImage: `url(${spotifyCover})`,
+    backgroundSize: 'cover',
+    backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + url + ')',
+
+  }}>
    <div className="mt-6 rounded-md max-w-md mx-10 z-1 sm:mx-auto height-wrap animate-spin-slow">
       <div className="flex mx-10 flex-col justify-center items-center">
       <img className="absolute mx-auto top-28 z-2 width-wrap" src={spotifyCover}></img>
@@ -47,6 +54,7 @@ return (
     </div>
       </button>
    
+   </div>
    </div>
   </>
     )

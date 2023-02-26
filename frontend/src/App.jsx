@@ -1,29 +1,20 @@
-import NavBar from './components/NavBar.jsx'
-import MusicPost from './components/MusicPost.jsx'
-import Taylor from './assets/midnights-sample.png'
+
 import './App.css'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Home } from "./pages/Home"
 import './assets/ringift.ttf'
-// import reactLogo from './assets/react.svg'
+import { FeedPage } from './pages/FeedPage';
 
 function App() {
-  console.log(Taylor)
   return (
-    <>
-   <NavBar />
-   <div className='flex justify-center'>
-    <button className='mx-10 bg-blue-200 p-2 flex-1 md:w-10 rounded-md'>
-      Add Today's Song
-    </button>
-  </div>
-  <MusicPost 
-  spotifyCover={Taylor}
-  song={"Mastermind"}
-  artist={"Taylor Swift"}
-  time={"13:49"}
-  userDescription={"Just listened to 'Mastermind' by Taylor Swift and it's a great addition to her discography. Catchy melody, clever lyrics, and well-produced with interesting electronic elements. Highly recommend giving it a listen!"}/>
-  <MusicPost /> 
-   </>
-  )
+    <BrowserRouter>
+      <Routes>
+          <Route index element={<Home />} />
+          <Route path="feed" element={<FeedPage />} />
+          {/*<Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
+export default App;
