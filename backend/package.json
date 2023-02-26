@@ -22,6 +22,7 @@
     "style": "npm run lint:fix && npm run format"
   },
   "devDependencies": {
+    "esbuild": "^0.17.10",
     "eslint-plugin-import": "^2.27.5",
     "prettier": "^2.8.4"
   }

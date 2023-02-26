@@ -1,4 +1,4 @@
-const { User, Post, Comment } = require("../models")
+const { User, Post, Comment, Song} = require("../models")
 const express = require("express")
 const ObjectId = require("mongodb").ObjectId
 
@@ -78,7 +78,6 @@ router.get("/comments/comment/:commentId", async (req, res) => {
   res.status(200).send(commentData)
 })
 
-module.exports = router
 // Update user username
 router.put("/users/:id/:username", async (req, res) => {
   const { id, username } = req.params
@@ -95,5 +94,26 @@ router.put("/users/:id/:username", async (req, res) => {
   })
   res.status(200).send(response)
 })
+
+// Post a song to the database
+router.post("/songs", async (req, res) => {
+  const song = req.body;
+  console.log('song in router'  , song)
+  try {
+    await Song.findOneAndUpdate(song, {$setOnInsert: {song}}, {new: true, upsert: true}). then((response) => {
+      res.status(200).send(response);});
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.post("/posts", async (req, res) => {
+  const post = req.body;
+  console.log('post in router'  , post)
+try{ await Post.create(post).then(response =>
+  res.status(200).send(response)) }
+catch {err => res.status(500).send(err)}
+})
+
 
 module.exports = router
