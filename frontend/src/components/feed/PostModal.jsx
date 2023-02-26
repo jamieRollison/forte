@@ -20,7 +20,9 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
       isOpen={modalVisible}
       appElement={document.getElementById("root")}
       onRequestClose={() => setModalVisible(false)}
-      className="w-80 h-auto mt-40 bg-black mx-auto rounded-xl"
+      className="w-[40rem]
+
+ h-auto mt-40 bg-black mx-auto rounded-xl"
     >
       <div className="flex flex-col justify-between items-center">
         <p className="text-white text-xl text-center pt-3 font-galos px-10">
@@ -35,6 +37,7 @@ const PostModal = ({ modalVisible, setModalVisible }) => {
           onSearch={handleSearch}
           options={options}
           placeholder="Search Spotify..."
+          size={"lg"}
           className="px-2 w-60 h-8 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600"
           renderMenuItemChildren={(option) => {
             return (
