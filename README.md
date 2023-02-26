@@ -27,3 +27,11 @@ and using the following frameworks
 Unlike a CRA or bundler-based build setup, [Vite](https://vitejs.dev/) does not build the entire application before serving. It divides the application modules into two categories: dependencies and source code! It has an improved build preformance hat we wanted to tackle working with! ✨✨ 
 
 ### Challenges 
+
+<p align="middle">
+
+<img width="40px" src="https://athenahacks.com/images/athenahacks_logo.png" />
+</br>
+Created with 💗 for AthenaHacks 2023 at USC 🦉 </p>
+
+</p>
