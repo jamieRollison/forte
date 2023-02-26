@@ -4,6 +4,8 @@ import { BsSpotify } from "react-icons/bs"
 import MyPFP from "../../assets/ellie.JPG"
 import { getLikes } from "../../api/api"
 import { CommentSection } from "../../pages/CommentSection"
+import { BsChat } from "react-icons/bs"
+import { BsHeart } from "react-icons/bs"
 
 const MusicPost = ({
   spotifyCover,
@@ -14,8 +16,8 @@ const MusicPost = ({
   userDescription,
   picture,
   username,
+  url,
 }) => {
-  const [url, setUrl] = useState(spotifyCover)
   const [likes, setLikes] = useState([])
   const [likeCount, setLikeCount] = useState([])
   const postId = "63fb40a79c13727e0178c2a1"
@@ -72,16 +74,27 @@ const MusicPost = ({
             <p className="text-gray-400">By {artist}</p>
           </div>
           <button
-            className="bg-green-600 hover:bg-green-800 rounded p-1  text-white"
+            className="bg-green-600 hover:bg-green-800 rounded p-1 text-white"
             onClick={spotifyLink}
-          >
+          ><a href={url}>
             <div className="flex items-center mx-3 font-galos font-bold">
-              Play on
+              <p className="w-15">Play on</p>
+              
               <BsSpotify className="text-white text-xl ml-2" />
+              
             </div>
+            </a>
           </button>
         </div>
-        <h1 className="text-white text-lg self-center mb-5 font-galos font-bold">{userDescription}</h1>
+        <div className="flex-rows justify-between flex">
+          <div className="w-60">
+            <p className="text-white text-sm self-left justify-start mb-5 ml-12 font-galos">{userDescription}</p>
+          </div>
+          <div className="flex flex-row justify-right">
+          <BsHeart className="text-white w-8 h-8 self-right mr-7"/>
+          <BsChat className="text-white w-8 h-8 self-right mr-14"/>
+          </div>
+          </div>
         <CommentSection postId={postId} />
       </div>
     </>

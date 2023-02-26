@@ -19,7 +19,7 @@ const FeedPage = () => {
       if(postData) {
     await Promise.all(postData.map(async (post) => {
       const d = new Date(post.dateCreated)
-      const {artist, imgUrl, songName} = await getSong(post.song).then((res) => res)
+      const {artist, imgUrl, songName, url} = await getSong(post.song).then((res) => res)
       const { username, picture } = await getUser(post.userId).then((res) => res)
       return {
         userDescription: post.description,
@@ -28,7 +28,8 @@ const FeedPage = () => {
         imgUrl: imgUrl,
         songName: songName,
         username: username,
-        picture: picture
+        picture: picture,
+        url: url
       }
     })).then((res) => {setPosts(res)})}
   }
@@ -71,10 +72,6 @@ const FeedPage = () => {
     refreshAccessToken()
   }, [])
 
-  setInterval(async () => {
-    refreshAccessToken()
-  }, 3600 * 1000)
-
   return (
     <>
       <NavBar userId={userId} showIcons={true} />
@@ -105,6 +102,7 @@ const FeedPage = () => {
             song={post.songName}
             time={post.time}
             picture={post.picture}
+            url={post.url}
           />
         )
       })}
