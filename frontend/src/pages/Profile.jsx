@@ -1,25 +1,52 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import { getUser } from "../api/api"
+import { getUser, getUserPosts, getSong } from "../api/api"
 import NavBar from "../components/NavBar"
 import { EditProfileModal } from "../components/profile/EditProfileModal"
 import { PostPreviewCard } from "../components/profile/PostPreviewCard"
 
 const Profile = () => {
-  const profiles = [1, 2, 3, 4, 5, 45, 45, 45, 6, 7, 8]
-  const location = useLocation()
-  const { userId } = location.state
-  const [user, setUser] = useState({})
-  const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false)
-  const [isCardModalVisible, setIsCardModalVisible] = useState(false)
+    const [posts, setPosts] = useState(); 
+    const location = useLocation();
+    const { userId } = location.state;
+    const [user, setUser] = useState({});
+    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
+    const [isCardModalVisible, setIsCardModalVisible] = useState(false);
+
+    const convertDate = (dateString) => {
+      console.log(dateString)
+      const date = new Date(dateString);
+      console.log( date.toLocaleDateString())
+      return date.toLocaleDateString();
+    }
 
   useEffect(() => {
+    // console.log("HIIII")
     const getUserInfo = async () => {
       const res = await getUser(userId)
       setUser(res)
     }
+    // console.log()
+    // console.log("HIIII2")
     getUserInfo()
-  }, [setUser])
+    const getPosts = async() => {
+      const res2 = await getUserPosts(userId)
+      const postsWithSongs = res2.map(async (element) => {
+          const res3 = await getSong(element.song)
+          console.log("REACHED HERE")
+          return {...element, song: res3}
+      })
+      console.log("REACHED HERE2")
+      const data = await Promise.all(postsWithSongs);
+      console.log("THIS IS THE DATA");
+      setPosts(data)
+    }
+    getPosts().then(response => {
+      console.log(response);
+  }).catch(e => {
+      console.log(e);
+  });
+  }, [setUser, setPosts])
 
   return (
     <>
@@ -58,20 +85,22 @@ const Profile = () => {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          marginTop: "20px",
-          height: "200px",
+          marginTop: "40px",
+          height: "550px",
           overflow: "scroll",
         }}
       >
-        {profiles.map((profile, i) => (
+        {posts?.map((post, i) => (
           <PostPreviewCard
             key={i}
-            date={profile}
-            img={"https://react.semantic-ui.com/images/avatar/large/matthew.png"}
+            date={convertDate(post.dateCreated)}
+            img={post.song.imgUrl}
             isCardModalVisible={isCardModalVisible}
             setIsCardModalVisible={setIsCardModalVisible}
           />
         ))}
+
+        
       </div>
     </>
   )

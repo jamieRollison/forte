@@ -192,7 +192,19 @@ router.post("/posts", async (req, res) => {
   }
 })
 
-// Get a song from the database
+router.get("/posts/user/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  try {
+    await Post.find({ userId: userId }).then((response) =>
+      res.status(200).send(response)
+    )
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
+})
+
+// get a song from the database
 router.get("/songs/:songId", async (req, res) => {
   const { songId } = req.params
   try {

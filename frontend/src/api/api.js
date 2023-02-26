@@ -118,7 +118,7 @@ export const findUserLike = async (query) => {
   const res = await api.get(requestString)
 }
 
-export const getPosts = async (userId) => {
+export const getFeedPosts = async (userId) => {
   if (userId) {
     const requestString = `/posts/${userId}`
     const res = await api.get(requestString)
@@ -127,6 +127,19 @@ export const getPosts = async (userId) => {
     return null
   }
 }
+
+export const getUserPosts = async (userId) => {
+  if (userId) {
+    const requestString = `/posts/user/${userId}`
+    const res = await api.get(requestString)
+    console.log(res.data)
+    return res.data
+  } else {
+    return null
+  }
+}
+
+export const postPost = async (post) => {
 
 export const postPost = async (post) => {
   const requestString = `/posts`

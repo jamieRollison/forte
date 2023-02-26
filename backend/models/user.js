@@ -22,12 +22,8 @@ const userSchema = new Schema({
   spotifyUsername: {
     type: String,
   },
-  posts: {
-    type: [Schema.Types.ObjectId],
-  },
-  friends: {
-    type: [Schema.Types.ObjectId],
-  },
+  posts: [{ type : Schema.Types.ObjectId, ref: 'Post' }],
+  friends: [{ type : Schema.Types.ObjectId, ref: 'User' }],
   picture: {
     type: String,
   },
