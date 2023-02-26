@@ -31,3 +31,19 @@ export const findOrCreateUser = async (patientInfo) => {
   const res = await api.post(requestString, patientInfo);
   return res.data;
 };
+
+export const getUser = async (userId) => {
+  const requestString = `/users/${userId}`
+  const res = await api.get(requestString)
+  return res.data
+}
+
+export const updateUsername = async (id, username) => {
+  const requestString = `/users/${id}/${username}`
+  try {
+    await api.put(requestString)
+    return true;
+  } catch (err) {
+    return false;
+  }
+}

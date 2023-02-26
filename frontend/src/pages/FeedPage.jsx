@@ -11,26 +11,28 @@ import { FaPlus } from "react-icons/fa";
 
 const FeedPage = () => {
     const [modalVisible, setModalVisible] = useState(false)
+    const [userId, setUserId] = useState("");
     const { user, isLoading } = useAuth0();
     useEffect(() => {
         if (!isLoading) {
             localStorage.setItem("user", JSON.stringify(user));
             const makeUser = async () => {
-                await findOrCreateUser({
+                const res = await findOrCreateUser({
                     username: user.nickname,
                     firstName: user.given_name,
                     lastName: user.family_name,
                     picture: user.picture,
                     email: `${user.nickname}@gmail.com`
                 })
+                setUserId(res._id)
             }
             makeUser();
         }
-      }, [isLoading]);
+      }, [isLoading, setUserId]);
 
     return (
         <>
-            <NavBar />
+            <NavBar userId={userId} showIcons={true}/>
             <PostModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
             <div className="flex flex-col items-center">
             <div>
