@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import { getUser } from "../api/api"
 import NavBar from "../components/NavBar"
 import { EditProfileModal } from "../components/profile/EditProfileModal"
+import { LogoutButton } from "../components/auth/LogoutButton"
 
 const Profile = () => {
   const location = useLocation()
@@ -47,6 +48,7 @@ const Profile = () => {
         >
           Edit Profile
         </button>
+        <LogoutButton />
       </div>
     </>
   )
