@@ -24,7 +24,6 @@
   "devDependencies": {
     "esbuild": "^0.17.10",
     "eslint-plugin-import": "^2.27.5",
-    "@esbuild/linux-x64": "^0.17.10",
     "prettier": "^2.8.4"
   }
 }
