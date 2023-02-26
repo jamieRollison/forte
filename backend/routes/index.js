@@ -1,6 +1,5 @@
-const { User } = require("../models")
+const { User, Post, Comment } = require("../models")
 const express = require("express")
-const { Post } = require("../models")
 const ObjectId = require("mongodb").ObjectId
 
 const router = express.Router()
@@ -22,7 +21,9 @@ router.get("/likes/:postId", async (req, res) => {
   const { postId } = req.params
 
   const postData = await Post.findById(ObjectId(postId))
+  console.log("post like data", postData)
   const postLikes = postData.reactions
+  console.log("after", postLikes)
 
   res.status(200).send(postLikes)
 })
@@ -54,8 +55,12 @@ router.delete("/likes/:postId/:userId", async (req, res) => {
 router.get("/comments/:postId", async (req, res) => {
   const { postId } = req.params
 
+  console.log(postId)
+
   const postData = await Post.findById(ObjectId(postId))
-  const postComments = postData.comments
+  console.log(postData)
+  const postComments = postData?.comments
+  console.log(postComments)
 
   res.status(200).send(postComments)
 })
@@ -63,10 +68,17 @@ router.get("/comments/:postId", async (req, res) => {
 // Get user
 router.get("/users/:userId", async (req, res) => {
   const { userId } = req.params
-
   const userData = await User.findById(ObjectId(userId))
 
   res.status(200).send(userData)
+})
+
+// Get comment
+router.get("/comments/comment/:commentId", async (req, res) => {
+  const { commentId } = req.params
+  const commentData = await Comment.findById(ObjectId(commentId))
+
+  res.status(200).send(commentData)
 })
 
 module.exports = router
