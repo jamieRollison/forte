@@ -31,19 +31,4 @@ router.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-router.get('/search/:query', (req, res) => {
-  const { q } = req.params.query;
-  const options = {
-    url: `https://api.spotify.com/v1/search?q=${q}&type=track`,
-    headers: {
-      Authorization: `Bearer ${access_token}`
-    },
-  }
-  request.get(options, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      res.send(body);
-    }
-  });
-});
-
 module.exports = router;
