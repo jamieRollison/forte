@@ -9,7 +9,6 @@ const CommentSection = ({ postId }) => {
   useEffect(() => {
     getComments(postId).then((postComments) => {
       setComments(postComments)
-      console.log(postId, "comments: ", comments)
     })
   }, [])
 

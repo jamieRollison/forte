@@ -8,6 +8,7 @@ const router = express.Router()
 router.post("/users", async (req, res) => {
   const user = req.body
   const { username } = user
+
   const response = await User.findOneAndUpdate({ username: username }, user, {
     upsert: true,
     new: true,
@@ -21,9 +22,7 @@ router.get("/likes/:postId", async (req, res) => {
   const { postId } = req.params
 
   const postData = await Post.findById(ObjectId(postId))
-  console.log("post like data", postData)
   const postLikes = postData.reactions
-  console.log("after", postLikes)
 
   res.status(200).send(postLikes)
 })
@@ -55,12 +54,8 @@ router.delete("/likes/:postId/:userId", async (req, res) => {
 router.get("/comments/:postId", async (req, res) => {
   const { postId } = req.params
 
-  console.log(postId)
-
   const postData = await Post.findById(ObjectId(postId))
-  console.log(postData)
   const postComments = postData?.comments
-  console.log(postComments)
 
   res.status(200).send(postComments)
 })
@@ -68,6 +63,7 @@ router.get("/comments/:postId", async (req, res) => {
 // Get user
 router.get("/users/:userId", async (req, res) => {
   const { userId } = req.params
+
   const userData = await User.findById(ObjectId(userId))
 
   res.status(200).send(userData)
@@ -76,6 +72,7 @@ router.get("/users/:userId", async (req, res) => {
 // Get comment
 router.get("/comments/comment/:commentId", async (req, res) => {
   const { commentId } = req.params
+
   const commentData = await Comment.findById(ObjectId(commentId))
 
   res.status(200).send(commentData)
