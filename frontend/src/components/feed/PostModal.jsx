@@ -2,18 +2,18 @@ import ReactModal from "react-modal"
 import { AsyncTypeahead } from "react-bootstrap-typeahead"
 import { SearchResult } from "./SearchResult"
 import { useState } from "react"
-
+import { songSearch } from "../../api/api"
 
 const PostModal = ({modalVisible, setModalVisible}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
 
-    // const handleSearch = async (query) => {
-    //   setIsLoading(true)
+    const handleSearch = async (query) => {
+      setIsLoading(true)
   
-    //   setOptions(await songSearch(query))
-    //   setIsLoading(false)
-    // }
+      setOptions(await songSearch(query))
+      setIsLoading(false)
+    }
     
     return (
       <ReactModal
@@ -29,15 +29,14 @@ const PostModal = ({modalVisible, setModalVisible}) => {
           <AsyncTypeahead
           id="async-search"
           filterBy={() => true}
-          isLoading
+          isLoading={isLoading}
           labelKey="name"
           minLength={3}
-          onSearch={() => {return}}
+          onSearch={handleSearch}
           options={options}
           placeholder="Search Spotify..."
           className="px-2 w-60 h-8 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600"
           renderMenuItemChildren={(option) => {
-            console.log(option)
             return (
               <>
                 <SearchResult {...option} />

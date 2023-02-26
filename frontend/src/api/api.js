@@ -1,6 +1,15 @@
 import api from "../axios";
 import { Buffer } from "buffer";
 
+export const songSearch = async (query) => {
+  const requestString = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`
+  const res = await api.get(requestString, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  })
+
+  return res.data.tracks.items
+}
+
 export const getAccessToken = async () => {
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
@@ -34,15 +43,6 @@ export const getAccessToken = async () => {
     .then((res) => {
       return res.data.access_token
     })
-}
-
-export const songSearch = async (query) => {
-  const requestString = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`
-  const res = await api.get(requestString, {
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-  })
-
-  return res.data.tracks.items
 }
 
 export const getLikes = async (postId) => {
