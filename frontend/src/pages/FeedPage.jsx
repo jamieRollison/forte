@@ -84,7 +84,7 @@ const FeedPage = () => {
           </h1>
         </div>
         <button
-          className="mx-10 bg-blue-800 text-white p-2 flex-1 md:w-60 rounded-md font-galos inline-flex items-center"
+          className="mx-10 bg-blue-800 text-white p-2 flex-1 md:w-60 rounded-md font-galos inline-flex items-center justify-center"
           onClick={() => setModalVisible(true)}
         >
           <FaPlus size={15} className="mr-2" />

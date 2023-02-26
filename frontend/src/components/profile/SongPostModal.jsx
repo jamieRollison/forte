@@ -3,6 +3,7 @@ import React from "react"
 import Vinyl from "../../assets/vinyl.PNG"
 import { BsSpotify } from "react-icons/bs"
 import MyPFP from "../../assets/ellie.JPG"
+import { AiOutlineCloseCircle } from "react-icons/ai"
 
 const SongPostModal = ({
   isModalVisible,
@@ -19,8 +20,11 @@ const SongPostModal = ({
     <ReactModal
       isOpen={isModalVisible}
       onRequestClose={() => setIsModalVisible(false)}
-      className="w-80 h-1/6 mt-40 bg-black mx-auto rounded-xl"
+      className="w-screen h-screen mt-20 bg-black mx-auto rounded-xl"
     >
+      <button className="text-white ml-10 mt-10">
+        <AiOutlineCloseCircle size={20}/>
+      </button>
       <div className="mb-10 flex flex-col md:mx-60">
         <div className="flex justify-between mx-10 mb-4">
           <div className="mt-10 flex items-center">
