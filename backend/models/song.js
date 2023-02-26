@@ -13,8 +13,10 @@ const songSchema =  new Schema({
     url: {
         type: String,
         required: true,
-        unique: true,
     },
+    imgUrl: {
+        type:String
+    }
 });
 
 const Song = mongoose.model("Song", songSchema, "Song")
