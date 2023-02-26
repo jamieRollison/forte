@@ -26,13 +26,8 @@ router.post("/likes/:postId/:userId", async (req, res) => {
     $push: { reactions: ObjectId(userId) },
   });
 
+  // Add a try-catch here later
   res.status(200).send("Added like");
-
-  if (response) {
-    return true;
-  } else {
-    return false;
-  }
 });
 
 // Remove like
@@ -44,12 +39,6 @@ router.delete("/likes/:postId/:userId", async (req, res) => {
   });
 
   res.status(200).send("Removed like");
-
-  if (response) {
-    return true;
-  } else {
-    return false;
-  }
 });
 
 module.exports = router;

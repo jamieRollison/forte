@@ -15,7 +15,6 @@ function App() {
         </button>
       </div>
       <Post />
-      <LikeReact postId="63fac96e0f9689f99948eb85" className="h-100 w-100" />
     </>
   );
 }

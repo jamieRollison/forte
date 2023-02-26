@@ -1,5 +1,5 @@
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getLikes, addLike, removeLike } from "../api/api";
 
 const LikeReact = ({ postId }) => {
@@ -27,12 +27,12 @@ const LikeReact = ({ postId }) => {
   };
 
   return (
-    <div className="h-100 w-100">
+    <div>
       {" "}
       {isLiked ? (
-        <AiFillHeart className="fill-white" onClick={clickLike} />
+        <AiFillHeart className="fill-white" onClick={clickLike} size={30} />
       ) : (
-        <AiOutlineHeart className="fill-white" onClick={clickLike} />
+        <AiOutlineHeart className="fill-white" onClick={clickLike} size={30} />
       )}{" "}
     </div>
   );
