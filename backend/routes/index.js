@@ -2,7 +2,7 @@ const express = require("express");
 const { Post } = require("../models");
 const ObjectId = require("mongodb").ObjectId;
 
-const router = express.Router();
+const router = express.Router()
 
 // routes go here
 router.get("/", (req, res) => {
