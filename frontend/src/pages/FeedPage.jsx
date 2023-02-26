@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar.jsx'
 import Post from '../components/Post.jsx'
 import { useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import { findOrCreateUser } from '../../api/api.js';
+import { findOrCreateUser } from '../api/api';
 import { PostModal } from '../components/feed/PostModal.jsx';
 import { useState } from "react";
 
