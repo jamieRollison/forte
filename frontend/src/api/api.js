@@ -134,7 +134,6 @@ export const getUserPosts = async (userId) => {
 }
 
 export const postPost = async (post) => {
-
   const requestString = `/posts`
   const songId = await postSong(post.song).then((res) => {
     return res._id
@@ -154,6 +153,27 @@ export const postSong = async (song) => {
 
 export const getSong = async (songId) => {
   const requestString = `/songs/${songId}`
+  const res = await api.get(requestString)
+
+  return res.data
+}
+
+export const getUserByUsername = async (username) => {
+  const requestString = `/username/${username}`
+  const res = await api.get(requestString)
+
+  return res.data
+}
+
+export const addFriend = async (userId, friendId) => {
+  const requestString = `/friends/${userId}/${friendId}`
+  const res = await api.post(requestString)
+
+  return res.data
+}
+
+export const getFriends = async (userId) => {
+  const requestString = `/friends/${userId}`
   const res = await api.get(requestString)
 
   return res.data

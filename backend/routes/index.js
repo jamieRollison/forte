@@ -1,4 +1,4 @@
-const { User, Post, Comment, Song} = require("../models")
+const { User, Post, Comment, Song } = require("../models")
 const express = require("express")
 const ObjectId = require("mongodb").ObjectId
 
@@ -9,7 +9,7 @@ router.post("/users", async (req, res) => {
   const user = req.body
   const { email } = user
   try {
-   await User.findOneAndUpdate({ email: email }, user, {
+    await User.findOneAndUpdate({ email: email }, user, {
       upsert: true,
       new: true,
     }).then((response) => {
@@ -19,8 +19,6 @@ router.post("/users", async (req, res) => {
     console.log(err)
     res.status(500).send(err)
   }
-
-  
 })
 
 // Get post likes
@@ -106,62 +104,96 @@ router.get("/posts/:userId", async (req, res) => {
   const { userId } = req.params
 
   const userData = await User.findById(ObjectId(userId))
-  const friends = userData.friends.concat(userId).map(id =>
-    ObjectId(id));
+  const friends = userData.friends.concat(userId).map((id) => ObjectId(id))
 
-    console.log('friends' , friends)
+  var start = new Date()
+  start.setHours(0, 0, 0, 0)
 
-  var start = new Date();
-  start.setHours(0,0,0,0);
-
-  var end = new Date();
-  end.setHours(23,59,59,999);
-  // {dateCreated: {$gte: start, $lt: end}} 
+  var end = new Date()
+  end.setHours(23, 59, 59, 999)
+  // {dateCreated: {$gte: start, $lt: end}}
   // {$and: [
-  await Post.find({ userId : { $in : friends } }).then(response => 
-    {console.log('posts:', response); res.status(200).send(response)});
-
+  await Post.find({ userId: { $in: friends } }).then((response) => {
+    res.status(200).send(response)
+  })
 })
 
 // Post a song to the database
 router.post("/songs", async (req, res) => {
-  const song = req.body;
-  console.log('song in router'  , song)
+  const song = req.body
+
   try {
-    await Song.findOneAndUpdate(song, {$setOnInsert: {song}}, {new: true, upsert: true}). then((response) => {
-      res.status(200).send(response);});
+    await Song.findOneAndUpdate(
+      song,
+      { $setOnInsert: { song } },
+      { new: true, upsert: true }
+    ).then((response) => {
+      res.status(200).send(response)
+    })
   } catch (err) {
     res.status(500).send(err)
   }
 })
 
-
 // post a post to the database
 router.post("/posts", async (req, res) => {
-  const post = req.body;
-  console.log('post in router'  , post)
-try{ await Post.create(post).then(response =>
-  res.status(200).send(response)) }
-catch {err => res.status(500).send(err)}
+  const post = req.body
+
+  try {
+    await Post.create(post).then((response) => res.status(200).send(response))
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
 })
 
 router.get("/posts/user/:userId", async (req, res) => {
-  const {userId} = req.params;
-  
-  
-try{ await Post.find({userId: userId}).then(response =>
-  res.status(200).send(response)) }
-catch {err => res.status(500).send(err)}
-})
+  const { userId } = req.params
 
+  try {
+    await Post.find({ userId: userId }).then((response) =>
+      res.status(200).send(response)
+    )
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
+})
 
 // get a song from the database
 router.get("/songs/:songId", async (req, res) => {
-  const { songId } = req.params;
+  const { songId } = req.params
   try {
-    await Song.findById(songId).then(response =>
-      res.status(200).send(response)) }
-    catch {err => res.status(500).send(err)}
-    })
+    await Song.findById(songId).then((response) => res.status(200).send(response))
+  } catch {
+    ;(err) => res.status(500).send(err)
+  }
+})
+
+router.get("/username/:usernameQuery", async (req, res) => {
+  const { usernameQuery } = req.params
+
+  const user = await User.findOne({ username: usernameQuery }).exec()
+
+  res.status(200).send(user)
+})
+
+router.post("/friends/:userId/:friendId", async (req, res) => {
+  const { userId, friendId } = req.params
+
+  const response = await User.findByIdAndUpdate(userId, {
+    $push: { friends: ObjectId(friendId) },
+  })
+
+  // Add a try-catch here later
+  res.status(200).send("Added friend")
+})
+
+router.get("/friends/:userId", async (req, res) => {
+  const { userId } = req.params
+
+  const userData = await User.findById(ObjectId(userId))
+  const userFriends = userData.friends
+
+  res.status(200).send(userFriends)
+})
 
 module.exports = router
