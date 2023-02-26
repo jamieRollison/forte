@@ -1,5 +1,5 @@
-import api from "../axios";
-import { Buffer } from "buffer";
+import api from "../axios"
+import { Buffer } from "buffer"
 
 export const songSearch = async (query) => {
   const requestString = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`
@@ -99,7 +99,6 @@ export const getComment = async (commentId) => {
   const requestString = `/comments/comment/${commentId}`
   const res = await api.get(requestString)
 
-  return res.data
   return res.data
 }
 

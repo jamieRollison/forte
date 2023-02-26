@@ -4,29 +4,29 @@ import { SearchResult } from "./SearchResult"
 import { useState } from "react"
 import { songSearch } from "../../api/api"
 
-const PostModal = ({modalVisible, setModalVisible}) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [options, setOptions] = useState([])
+const PostModal = ({ modalVisible, setModalVisible }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [options, setOptions] = useState([])
 
-    const handleSearch = async (query) => {
-      setIsLoading(true)
-  
-      setOptions(await songSearch(query))
-      setIsLoading(false)
-    }
-    
-    return (
-      <ReactModal
-        isOpen={modalVisible}
-        appElement={document.getElementById('root')}
-        onRequestClose={() => setModalVisible(false)}
-        className="w-80 h-auto mt-40 bg-black mx-auto rounded-xl"
-      >
-        <div className="flex flex-col justify-between items-center">
-          <p className="text-white text-xl text-center pt-3 font-galos px-10">
-            What are you listening to today?
-          </p>
-          <AsyncTypeahead
+  const handleSearch = async (query) => {
+    setIsLoading(true)
+
+    setOptions(await songSearch(query))
+    setIsLoading(false)
+  }
+
+  return (
+    <ReactModal
+      isOpen={modalVisible}
+      appElement={document.getElementById("root")}
+      onRequestClose={() => setModalVisible(false)}
+      className="w-80 h-auto mt-40 bg-black mx-auto rounded-xl"
+    >
+      <div className="flex flex-col justify-between items-center">
+        <p className="text-white text-xl text-center pt-3 font-galos px-10">
+          What are you listening to today?
+        </p>
+        <AsyncTypeahead
           id="async-search"
           filterBy={() => true}
           isLoading={isLoading}
@@ -40,19 +40,19 @@ const PostModal = ({modalVisible, setModalVisible}) => {
             return (
               <>
                 <SearchResult {...option} />
-             </>
+              </>
             )
           }}
         />
-          <button
-            className="bg-amber-400 p-2 mb-5 rounded-md w-1/2 font-galos text-white"
-            onClick={() => setModalVisible(false)}
-          >
-            Add Song
-          </button>
-        </div>
-      </ReactModal>
-    )
-  }
+        <button
+          className="bg-amber-400 p-2 mb-5 rounded-md w-1/2 font-galos text-white"
+          onClick={() => setModalVisible(false)}
+        >
+          Add Song
+        </button>
+      </div>
+    </ReactModal>
+  )
+}
 
 export { PostModal }
