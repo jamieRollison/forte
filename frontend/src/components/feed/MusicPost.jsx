@@ -79,7 +79,6 @@ const MusicPost = ({
               <BsSpotify className="text-white text-xl ml-2" />
             </div>
           </button>
-          
         </div>
         <CommentSection postId={postId} />
       </div>
