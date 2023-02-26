@@ -78,7 +78,6 @@ router.get("/comments/comment/:commentId", async (req, res) => {
   res.status(200).send(commentData)
 })
 
-module.exports = router
 // Update user username
 router.put("/users/:id/:username", async (req, res) => {
   const { id, username } = req.params
@@ -93,6 +92,16 @@ router.put("/users/:id/:username", async (req, res) => {
   const response = await User.findByIdAndUpdate(ObjectId(id), {
     $set: { username: username },
   })
+  res.status(200).send(response)
+})
+
+// Finds all usernames starting with the input
+router.get("/users?search=input", async (req, res) => {
+  const { input } = req.params
+  const formattedSearch = `/^${input}/`
+
+  const response = await User.find({ username: formattedSearch })
+
   res.status(200).send(response)
 })
 

@@ -55,7 +55,6 @@ export const getComment = async (commentId) => {
   const res = await api.get(requestString)
 
   return res.data
-  return res.data
 }
 
 export const updateUsername = async (id, username) => {
@@ -66,4 +65,12 @@ export const updateUsername = async (id, username) => {
   } catch (err) {
     return false
   }
+}
+
+export const findUserLike = async (input) => {
+  const requestString = `/users?search=${input}`
+
+  const res = await api.get(requestString)
+
+  return res.data
 }

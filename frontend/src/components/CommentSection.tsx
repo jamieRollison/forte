@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { getComments } from "../api/api"
-import { Comment } from "../components/Comment"
+import { Comment } from "./Comment"
 
 const CommentSection = ({ postId }) => {
   const [comments, setComments] = useState([])

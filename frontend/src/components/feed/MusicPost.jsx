@@ -3,7 +3,7 @@ import Vinyl from "../../assets/vinyl.PNG"
 import { BsSpotify } from "react-icons/bs"
 import MyPFP from "../../assets/ellie.JPG"
 import { getLikes } from "../../api/api"
-import { CommentSection } from "../../pages/CommentSection"
+import { CommentSection } from "../CommentSection"
 
 const MusicPost = ({
   spotifyCover,
