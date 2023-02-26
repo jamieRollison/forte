@@ -40,7 +40,7 @@ const FeedPage = () => {
 
   useEffect(() => {
     const createPosts = async () => {
-      await getPosts(localStorage.getItem('userId')).then((res) => setPosts(res))
+      await getPosts(userId).then((res) => setPosts(res))
     }
     createPosts()
   }, [getPosts, setPosts, userId])

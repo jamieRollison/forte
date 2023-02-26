@@ -7,14 +7,20 @@ const router = express.Router()
 // Add user to database if they do not already have an account
 router.post("/users", async (req, res) => {
   const user = req.body
-  const { username } = user
+  const { email } = user
+  try {
+   await User.findOneAndUpdate({ email: email }, user, {
+      upsert: true,
+      new: true,
+    }).then((response) => {
+      res.status(200).send(response)
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
 
-  const response = await User.findOneAndUpdate({ username: username }, user, {
-    upsert: true,
-    new: true,
-  })
-
-  res.status(200).send(response)
+  
 })
 
 // Get post likes
