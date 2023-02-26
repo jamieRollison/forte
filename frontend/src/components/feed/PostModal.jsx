@@ -7,18 +7,19 @@ const PostModal = ({modalVisible, setModalVisible}) => {
       <ReactModal
         isOpen={modalVisible}
         onRequestClose={() => setModalVisible(false)}
-        className="w-80 h-40 mt-40 bg-black mx-auto rounded-xl"
+        className="w-80 h-1/5 mt-40 bg-black mx-auto rounded-xl"
       >
         <div className="flex flex-col justify-between items-center">
-          <p className="text-white text-xl text-center pt-3">
+          <p className="text-white text-xl text-center pt-3 font-galos px-10">
             What are you listening to today?
           </p>
           <input
-            placeholder="search spotify"
-            className="px-2 w-60 h-8 rounded my-4 mx-10"
+            type="text"
+            placeholder="Search Spotify"
+            className="px-2 w-60 h-8 rounded my-4 mx-10 font-galos focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
           <button
-            className="bg-blue-200 p-2 rounded-md w-1/2"
+            className="bg-amber-400 p-2 rounded-md w-1/2 font-galos text-white"
             onClick={() => setModalVisible(false)}
           >
             Add Song

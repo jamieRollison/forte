@@ -15,22 +15,21 @@ return (
         <img className="inline mx-0 my-auto h-full w-auto rounded-full" src={MyPFP}></img>
         </div>
       </div>
-      <p className="text-gray-400 ml-2"> exrlla </p>
+      <p className="text-gray-400 ml-2 font-galos font-bold"> exrlla </p>
     </div>
-    <div className="text-gray-400 mt-10 flex items-center">
+    <div className="text-gray-400 mt-10 flex items-center font-galos">
       {time}
     </div>
   </div>
   <div className="flex mx-12 mt-2">
-    <p className="text-gray-500">
+    <p className="text-gray-500 font-galos">
       {userDescription}
     </p>
   </div>
 
   <div className="relative mx-10 rounded-lg" style={{
-    backgroundImage: `url(${spotifyCover})`,
+    backgroundImage: `url(${spotifyCover}), linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) `,
     backgroundSize: 'cover',
-    backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + url + ')',
 
   }}>
    <div className="mt-6 rounded-md max-w-md mx-10 z-1 sm:mx-auto height-wrap animate-spin-slow">
@@ -41,16 +40,16 @@ return (
    </div>
   </div>
   <div className="flex justify-center flex-col items-center mt-4">
-  <h1 className="text-white text-2xl">
+  <h1 className="text-white text-2xl font-galos font-bold">
       {song}
    </h1>
    <p className="text-gray-400">
       By {artist}
    </p>
    
-    <button className="bg-green-600 rounded p-1 m-2 text-white" onClick={spotifyLink}>
-      <div className="flex items-center mx-4">Play on
-    <BsSpotify className="text-white text-2xl ml-2" />
+    <button className="bg-green-600 hover:bg-green-800 rounded p-1 m-2 text-white" onClick={spotifyLink}>
+      <div className="flex items-center mx-4 font-galos font-bold">Play on
+    <BsSpotify className="text-white text-xl ml-2" />
     </div>
       </button>
    
