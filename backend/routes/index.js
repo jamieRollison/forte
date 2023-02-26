@@ -1,14 +1,18 @@
+const { User } = require('../models')
 const express = require("express");
 const { Post } = require("../models");
 const ObjectId = require("mongodb").ObjectId;
 
 const router = express.Router()
 
-// routes go here
-router.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+router.post('/users', async (req, res) => {
+  const user = req.body;
+  const {username} = user;
+  const response = await User.findOneAndUpdate({username: username}, user, {upsert: true, new: true})
+  res.status(200).send(response);
+})
 
+module.exports = router;
 // Get post likes
 router.get("/likes/:postId", async (req, res) => {
   const { postId } = req.params;
