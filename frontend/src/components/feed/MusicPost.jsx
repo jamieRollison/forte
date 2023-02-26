@@ -12,6 +12,7 @@ const MusicPost = ({
   song,
   time,
   userDescription,
+  picture,
   username,
 }) => {
   const [url, setUrl] = useState(spotifyCover)
@@ -34,7 +35,7 @@ const MusicPost = ({
               <div className="w-10 h-10 relative overflow-hidden border-sm">
                 <img
                   className="inline my-auto h-full w-auto rounded-full"
-                  src={MyPFP}
+                  src={picture}
                 ></img>
               </div>
             </div>
@@ -80,6 +81,7 @@ const MusicPost = ({
             </div>
           </button>
         </div>
+        <h1 className="text-white text-lg self-center mb-5 font-galos font-bold">{userDescription}</h1>
         <CommentSection postId={postId} />
       </div>
     </>
