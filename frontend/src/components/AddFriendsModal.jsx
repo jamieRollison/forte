@@ -7,7 +7,7 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
   const [input, setInput] = useState("")
   const [friendedState, setFriendedState] = useState("")
   const [isEditing, setIsEditing] = useState()
-  const userId = "63faf3f926a6086035ac949d"
+  const userId = "63fb7bb826a60860353ab47a"
 
   const bg = {
     overlay: {
@@ -17,9 +17,11 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
 
   const handleClick = async () => {
     // This user is the friend
+    console.log("input" + input)
     const friend = await getUserByUsername(input)
+    console.log(friend)
 
-    if (user) {
+    if (friend) {
       const friendIds = await getFriends(userId)
 
       if (friendIds.find((friendId) => friendId === friend.userId)) {
@@ -68,7 +70,7 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
         />
         <button
           className="bg-amber-400 rounded-md w-8 h-8 font-galos text-white"
-          onClick={() => handleClick}
+          onClick={handleClick}
         >
           +
         </button>

@@ -110,11 +110,12 @@ router.get("/users?user=query", async (req, res) => {
 })
 
 // Find user with the username
-router.get("/users?username=query", async (req, res) => {
-  const { query } = req.params
-  const formattedSearch = `/${query}/`
+router.get("/users/username/:username", async (req, res) => {
+  const { usernameQuery } = req.params
 
-  const response = await User.findOne({ username: formattedSearch })
+  const response = await User.findOne({ username: usernameQuery })
+
+  console.log(response)
 
   res.status(200).send(response)
 })
@@ -130,11 +131,13 @@ router.get("/users/friends/:userId", async (req, res) => {
 
 // Add friends
 router.post("/friends", async (req, res) => {
-  const { userId, friendId } = req.params
+  const { userId, friendId } = req.body
 
   const response = await User.findByIdAndUpdate(userId, {
     $push: { friends: ObjectId(friendId) },
   })
+
+  console.log(response)
 
   res.status(200).send("Added like")
 })
@@ -178,7 +181,7 @@ router.post("/songs", async (req, res) => {
   }
 })
 
-// post a post to the database
+// Post a post to the database
 router.post("/posts", async (req, res) => {
   const post = req.body
   console.log("post in router", post)
@@ -189,7 +192,7 @@ router.post("/posts", async (req, res) => {
   }
 })
 
-// get a song from the database
+// Get a song from the database
 router.get("/songs/:songId", async (req, res) => {
   const { songId } = req.params
   try {
