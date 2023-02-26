@@ -33,7 +33,7 @@ const Profile = () => {
             onClick={() => setIsEditProfileModalVisible(true)}
             >Edit Profile</button>
         </div>
-        <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center", marginTop:"20px", overflow:"scroll", height: "200px", overflow:"scroll"}}>
+        <div style={{display:"flex", flexWrap: "wrap", justifyContent:"center", marginTop:"20px", height: "200px", overflow:"scroll"}}>
             {profiles.map((profile, i) => (
                 <PostPreviewCard key={i} date={profile} img={"https://react.semantic-ui.com/images/avatar/large/matthew.png"} isCardModalVisible={isCardModalVisible} setIsCardModalVisible={setIsCardModalVisible}/>
             ))}
