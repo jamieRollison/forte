@@ -3,7 +3,6 @@ import { LogoutButton } from "../components/auth/LogoutButton"
 import ForteLogo from "../assets/forte-logo.png"
 
 const Home = () => {
-  console.log(localStorage)
   return (
     <div>
       <nav className="bg-black text-white flex justify-center py-5">
