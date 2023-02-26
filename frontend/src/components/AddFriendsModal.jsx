@@ -5,7 +5,7 @@ import { getUserByUsername, getFriends, addFriend } from "../api/api"
 
 const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
   const [input, setInput] = useState()
-  const [isEditing, setIsEditing] = useState()
+  const [isFinished, setIsFinished] = useState()
   const [friendedState, setFriendedState] = useState()
 
   const bg = {
@@ -34,13 +34,14 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
         )
       }
 
-      setIsEditing(false)
+      setIsFinished(true)
     })
   }
 
   const handleEditing = async (event) => {
     setInput(event.target.value)
-    setIsEditing(true)
+    setIsFinished(false)
+    setFriendedState("")
   }
 
   return (
@@ -74,7 +75,7 @@ const AddFriendsModal = ({ modalFriendsVisible, setModalFriendsVisible }) => {
           +
         </button>
       </div>
-      {isEditing ? <p>{friendedState}</p> : <></>}
+      {isFinished ? <p className="text-white mt-2 mx-12">{friendedState}</p> : <></>}
     </ReactModal>
   )
 }
