@@ -25,6 +25,7 @@ const FeedPage = () => {
           email: `${user.nickname}@gmail.com`,
         })
         setUserId(res._id)
+        localStorage.setItem("userId", res._id)
       }
       makeUser()
     }
