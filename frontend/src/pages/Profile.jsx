@@ -85,8 +85,8 @@ const Profile = () => {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          marginTop: "20px",
-          height: "200px",
+          marginTop: "40px",
+          height: "550px",
           overflow: "scroll",
         }}
       >
