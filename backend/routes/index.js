@@ -1,5 +1,4 @@
 const express = require('express');
-const { client_id, client_secret } = require('./spotify-credentials.js');
 const request = require('request');
 require('dotenv').config();
 
@@ -9,7 +8,7 @@ const generateToken = async () => {
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: {
-      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
+      'Authorization': 'Basic ' + (Buffer.from(process.env.client_id + ':' + process.env.client_secret).toString('base64'))
     },
     form: {
       grant_type: 'client_credentials'
