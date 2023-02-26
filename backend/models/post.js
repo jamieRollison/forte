@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const postSchema = new Schema({
   userId: {
@@ -21,9 +21,9 @@ const postSchema = new Schema({
   dateCreated: {
     type: Date,
   },
-});
+})
 
-const Post = mongoose.model("Post", postSchema, "Post");
+const Post = mongoose.model("Post", postSchema, "Post")
 module.exports = {
   Post,
-};
+}

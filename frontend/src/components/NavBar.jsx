@@ -16,9 +16,11 @@ const NavBar = ({ userId, showIcons }) => {
         <Link to="/feed">
           <img src={ForteLogo}></img>
         </Link>
-        {showIcons && <Link to="/profile" state={{ userId: userId }}>
-          <AiOutlineUser size={30} />
-        </Link>}
+        {showIcons && (
+          <Link to="/profile" state={{ userId: userId }}>
+            <AiOutlineUser size={30} />
+          </Link>
+        )}
       </div>
     </nav>
   )
