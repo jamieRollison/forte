@@ -23,10 +23,10 @@ const MusicPost = ({
   const postId = "63fb40a79c13727e0178c2a1"
 
   // Get likes in case we want usernames in the future
-  useEffect(() => {
-    getLikes(postId).then((likeIds) => setLikes(likeIds))
-    setLikeCount(likes.length)
-  }, [])
+  // useEffect(() => {
+  //   getLikes(postId).then((likeIds) => setLikes(likeIds))
+  //   setLikeCount(likes.length)
+  // }, [])
 
   return (
     <>
