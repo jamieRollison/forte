@@ -8,6 +8,7 @@ import { PostModal } from '../components/feed/PostModal.jsx';
 import { useState } from "react";
 import Taylor from '../assets/midnights-sample.png';
 import { FaPlus } from "react-icons/fa";
+import { getAccessToken } from '../api/api';
 
 const FeedPage = () => {
     const [modalVisible, setModalVisible] = useState(false)
@@ -29,6 +30,16 @@ const FeedPage = () => {
             makeUser();
         }
       }, [isLoading, setUserId]);
+
+      const refreshAccessToken = async () => {
+        const res = await getAccessToken();
+        localStorage.setItem("token", res);
+        console.log(res)
+        }
+
+      useEffect( () => {
+        refreshAccessToken();
+      }, []);
 
     return (
         <>

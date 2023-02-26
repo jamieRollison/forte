@@ -1,4 +1,16 @@
 import api from "../axios";
+import { Buffer } from 'buffer';
+
+export const getAccessToken = async () => {
+  const requestString = 'https://accounts.spotify.com/api/token';
+  const options = {headers: {'Content-Type':'application/x-www-form-urlencoded', 'Authorization': 'Basic ' + (Buffer.from(import.meta.env.VITE_SPOTIFY_CLIENT_ID + ':' + import.meta.env.VITE_SPOTIFY_CLIENT_SECRET).toString('base64'))}, params: {
+    grant_type: 'client_credentials', json: true
+  }}
+
+  return await api.post(requestString, {}, options).then((res) => {
+    return res.data.access_token;
+  });
+}
 
 export const getLikes = async (postId) => {
   const requestString = `/likes/${postId}`;
