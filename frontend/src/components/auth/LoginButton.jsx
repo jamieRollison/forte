@@ -5,8 +5,7 @@ import { Circles } from 'react-loader-spinner'
 
 
 const LoginButton = () => {
-    // console.log(JSON.parse(localStorage.getItem("user")))
-    const { loginWithRedirect, isAuthenticated, isLoading, user } = useAuth0();
+    const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
     if (isLoading) {
         return (
         <div style={{marginTop: "10%", paddingBottom: "5%", paddingTop: "5%"}}>
@@ -35,6 +34,10 @@ const LoginButton = () => {
         loginWithRedirect();
     }
 
-  return <div style={{paddingTop:"20%"}}><button style={{padding: "10px 20px 10px 20px", borderRadius: "10px"}} className="bg-white" onClick={onLogin}>Log In</button></div>;
+  return ( <div style={{paddingTop:"20%"}}>
+            <button style={{padding: "10px 20px 10px 20px", borderRadius: "10px"}} className="bg-white" onClick={onLogin}>
+              Log In
+            </button>
+          </div>);
 };
 export {LoginButton};

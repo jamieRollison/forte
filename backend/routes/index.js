@@ -5,7 +5,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
+router.post('/users', async (req, res) => {
   const user = req.body;
   const {username} = user;
   const response = await User.findOneAndUpdate({username: username}, user, {upsert: true, new: true})
