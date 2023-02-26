@@ -5,7 +5,7 @@ const router = require("./routes/index.js")
 const mongoose = require("mongoose")
 require("dotenv").config()
 
-async function start() {
+const start = async () => {
   const app = express()
   app.use(cors())
 
@@ -15,6 +15,8 @@ async function start() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+
+  await getAccessToken();
 
   app.listen(3000, () => {
     console.log("Server started on port 3000")
